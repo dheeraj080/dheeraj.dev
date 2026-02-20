@@ -53,17 +53,14 @@ function HeaderTitle() {
           animate={animation.show}
           transition={{ delay: 0.3 }}
         >
-          <span className={clsx('lowercase')}>A</span>{' '}
-          <strong
-            className={clsx(
-              'font-bold lowercase text-slate-700',
-              'dark:text-slate-300'
-            )}
-          >
-            Front-End Developer
+          <span className="lowercase text-slate-500">A</span>{' '}
+          <strong className="font-bold text-slate-900 dark:text-slate-100">
+            Full Stack Engineer & Solutions Architect
           </strong>{' '}
-          who loves intuitive,{' '}
-          <span className={clsx('block')}>clean and modern UI design.</span>
+          focused on building{' '}
+          <span className="block text-slate-600 dark:text-slate-400">
+            robust, scalable, and intuitive digital systems.
+          </span>
         </m.h1>
       </span>
     </div>
