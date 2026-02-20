@@ -1,6 +1,85 @@
 {
   "sortedMiddleware": [],
   "middleware": {},
-  "functions": {},
+  "functions": {
+    "/api/og-page": {
+      "files": [
+        "prerender-manifest.js",
+        "server/edge-runtime-webpack.js",
+        "server/pages/api/og-page.js"
+      ],
+      "name": "pages/api/og-page",
+      "page": "/api/og-page",
+      "matchers": [
+        {
+          "regexp": "^/api/og\\-page$",
+          "originalSource": "/api/og-page"
+        }
+      ],
+      "wasm": [
+        {
+          "name": "wasm_ef4866ecae192fd87727067cf2c0c0cf9fb8b020",
+          "filePath": "server/edge-chunks/wasm_ef4866ecae192fd87727067cf2c0c0cf9fb8b020.wasm"
+        },
+        {
+          "name": "wasm_a7e702bc5ba9227243abda7977c8096f59478d3f",
+          "filePath": "server/edge-chunks/wasm_a7e702bc5ba9227243abda7977c8096f59478d3f.wasm"
+        }
+      ],
+      "assets": [
+        {
+          "name": "PlusJakartaSans-Regular.481beba548d0efc3.ttf",
+          "filePath": "server/edge-chunks/asset_PlusJakartaSans-Regular.481beba548d0efc3.ttf"
+        },
+        {
+          "name": "PlusJakartaSans-ExtraBold.e09cfb097bad30bc.ttf",
+          "filePath": "server/edge-chunks/asset_PlusJakartaSans-ExtraBold.e09cfb097bad30bc.ttf"
+        },
+        {
+          "name": "noto-sans-v27-latin-regular.5dda3fca77107598.ttf",
+          "filePath": "server/edge-chunks/asset_noto-sans-v27-latin-regular.5dda3fca77107598.ttf"
+        }
+      ]
+    },
+    "/api/og-post": {
+      "files": [
+        "prerender-manifest.js",
+        "server/edge-runtime-webpack.js",
+        "server/pages/api/og-post.js"
+      ],
+      "name": "pages/api/og-post",
+      "page": "/api/og-post",
+      "matchers": [
+        {
+          "regexp": "^/api/og\\-post$",
+          "originalSource": "/api/og-post"
+        }
+      ],
+      "wasm": [
+        {
+          "name": "wasm_ef4866ecae192fd87727067cf2c0c0cf9fb8b020",
+          "filePath": "server/edge-chunks/wasm_ef4866ecae192fd87727067cf2c0c0cf9fb8b020.wasm"
+        },
+        {
+          "name": "wasm_a7e702bc5ba9227243abda7977c8096f59478d3f",
+          "filePath": "server/edge-chunks/wasm_a7e702bc5ba9227243abda7977c8096f59478d3f.wasm"
+        }
+      ],
+      "assets": [
+        {
+          "name": "PlusJakartaSans-Regular.481beba548d0efc3.ttf",
+          "filePath": "server/edge-chunks/asset_PlusJakartaSans-Regular.481beba548d0efc3.ttf"
+        },
+        {
+          "name": "PlusJakartaSans-ExtraBold.e09cfb097bad30bc.ttf",
+          "filePath": "server/edge-chunks/asset_PlusJakartaSans-ExtraBold.e09cfb097bad30bc.ttf"
+        },
+        {
+          "name": "noto-sans-v27-latin-regular.5dda3fca77107598.ttf",
+          "filePath": "server/edge-chunks/asset_noto-sans-v27-latin-regular.5dda3fca77107598.ttf"
+        }
+      ]
+    }
+  },
   "version": 2
 }
