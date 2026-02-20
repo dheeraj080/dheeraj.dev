@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://www.enji.dev
+Host: https://www.dheerajk.dev
 
 # Sitemaps
-Sitemap: https://www.enji.dev/sitemap.xml
+Sitemap: https://www.dheerajk.dev/sitemap.xml
