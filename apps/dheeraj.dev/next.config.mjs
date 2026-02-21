@@ -19,6 +19,17 @@ const nextConfig = {
   ],
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        // Optional: you can specify a port or pathname for tighter security
+        // port: '',
+        // pathname: '/**',
+      },
+    ],
+  },
 };
 
 const withBundleAnalyzer = bundeAnalyzer({

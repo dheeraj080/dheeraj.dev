@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 
 import HeaderCta from '@/contents/index/Header/HeaderCta';
-import HeaderImage from '@/contents/index/Header/HeaderImage';
-import HeaderTechStack from '@/contents/index/Header/HeaderTechStack';
+// import HeaderImage from '@/contents/index/Header/HeaderImage';
+// import HeaderTechStack from '@/contents/index/Header/HeaderTechStack';
 import HeaderTitle from '@/contents/index/Header/HeaderTitle';
 
 function Header() {
@@ -22,6 +22,7 @@ function Header() {
           <div className={clsx('mt-6 md:mt-8')}>
             <HeaderCta isFree={false} />
           </div>
+          {/*
           <div className={clsx('mt-20 lg:mt-36')}>
             <HeaderTechStack />
           </div>
@@ -33,6 +34,7 @@ function Header() {
           >
             <HeaderImage />
           </div>
+              */}
         </div>
       </div>
     </header>

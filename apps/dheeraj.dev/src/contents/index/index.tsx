@@ -9,6 +9,8 @@ import Header from '@/contents/index/Header';
 import PrettyOptimized from '@/contents/index/PrettyOptimized';
 import Quote from '@/contents/index/Quote';
 
+import ExperienceSection from './Project/ProjectSection';
+
 function FeaturedCardSection() {
   return (
     <div className={clsx('content-wrapper')}>
@@ -77,9 +79,9 @@ function IndexContents() {
       <div className={clsx('hidden', 'lg:-mt-16 lg:mb-24 lg:block')}>
         <FeaturedCardSection />
       </div>
-      <div className={clsx('-mt-12 mb-12', 'md:mb-24 md:mt-0')}>
-        <QuoteSection />
-      </div>
+      <section className={clsx('mb-12', 'lg:mb-24')}>
+        <ExperienceSection />
+      </section>
       <section className={clsx('mb-12', 'lg:mb-24')}>
         <CleanIntuitive />
       </section>

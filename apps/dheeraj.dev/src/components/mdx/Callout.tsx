@@ -8,55 +8,38 @@ interface CalloutProps {
   variant?: 'neutral' | 'info' | 'warning' | 'danger';
 }
 
+const CALLOUT_DATA: Record<
+  NonNullable<CalloutProps['variant']>,
+  { title: string; icon: ReactElement; modifier: string }
+> = {
+  neutral: { title: 'Note', icon: <NoteIcon />, modifier: '' },
+  info: { title: 'Info', icon: <InfoIcon />, modifier: 'mdx-callout--info' },
+  warning: {
+    title: 'Heads Up',
+    icon: <WarningIcon />,
+    modifier: 'mdx-callout--warning',
+  },
+  danger: {
+    title: 'Important',
+    icon: <ErrorIcon />,
+    modifier: 'mdx-callout--danger',
+  },
+};
+
 function Callout({
   variant = 'neutral',
-  children = null,
+  // eslint-disable-next-line react/require-default-props
+  children,
 }: PropsWithChildren<CalloutProps>) {
-  let data: {
-    title: string;
-    icon: ReactElement;
-    modifier: string;
-  };
-
-  switch (variant) {
-    case 'neutral':
-      data = {
-        title: 'Note',
-        icon: <NoteIcon />,
-        modifier: '',
-      };
-      break;
-    case 'info':
-      data = {
-        title: 'Info',
-        icon: <InfoIcon />,
-        modifier: 'mdx-callout--info',
-      };
-      break;
-    case 'warning':
-      data = {
-        title: 'Heads Up',
-        icon: <WarningIcon />,
-        modifier: 'mdx-callout--warning',
-      };
-      break;
-    case 'danger':
-      data = {
-        title: 'Important',
-        icon: <ErrorIcon />,
-        modifier: 'mdx-callout--danger',
-      };
-      break;
-    default:
-  }
+  const data = CALLOUT_DATA[variant];
 
   return (
     <div className={clsx('mdx-callout', data.modifier)}>
-      <div className={clsx('mdx-callout__header')}>
+      <div className="mdx-callout__header">
         {data.icon}
         {data.title}
       </div>
-      <div className={clsx('mdx-callout__content')}>{children}</div>
+      <div className="mdx-callout__content">{children}</div>
     </div>
   );
 }

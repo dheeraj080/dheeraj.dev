@@ -15,44 +15,25 @@ const focusToast = {
 };
 
 function Shortcuts() {
-  const toastRef = useRef(null);
+  const toastIdRef = useRef<string | null>(null);
   const { theme, setTheme } = useTheme();
   const { isQuickAccessOpen, setQuickAccessOpen } = useGlobal();
   const { focusMode, setFocusMode } = useFocusMode();
 
-  useShortcut('KeyD', () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-  });
-
-  useShortcut('KeyQ', () => {
-    setQuickAccessOpen(!isQuickAccessOpen);
-  });
-
-  useShortcut('KeyF', () => {
-    setFocusMode(!focusMode);
-  });
+  useShortcut('KeyD', () => setTheme(theme === 'dark' ? 'light' : 'dark'));
+  useShortcut('KeyQ', () => setQuickAccessOpen(!isQuickAccessOpen));
+  useShortcut('KeyF', () => setFocusMode(!focusMode));
 
   useEffect(() => {
-    if (toastRef.current) {
-      toast.remove(toastRef.current.id);
-    }
-    if (focusMode) {
-      toastRef.current = toast.custom((t) => (
-        <Toast
-          title={focusToast.title.replace('{STATUS}', 'On')}
-          message={focusToast.message}
-          t={t}
-        />
-      ));
-    } else {
-      toastRef.current = toast.custom((t) => (
-        <Toast
-          title={focusToast.title.replace('{STATUS}', 'Off')}
-          message={focusToast.message}
-          t={t}
-        />
-      ));
-    }
+    if (toastIdRef.current) toast.remove(toastIdRef.current);
+
+    toastIdRef.current = toast.custom((t) => (
+      <Toast
+        title={focusToast.title.replace('{STATUS}', focusMode ? 'On' : 'Off')}
+        message={focusToast.message}
+        t={t}
+      />
+    ));
   }, [focusMode]);
 
   return null;

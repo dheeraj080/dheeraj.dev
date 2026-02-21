@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { useMemo } from 'react';
 
 import useContentMeta from '@/hooks/useContentMeta';
 
@@ -24,46 +25,40 @@ type TPostPreview = TPostFrontMatter & {
 function BlogContents({ posts }: BlogContentsProps) {
   const { data } = useContentMeta();
 
-  let pinnedPost: TPostPreview;
-  const postsPreview: Array<TPostPreview> = [];
+  const { pinnedPost, postsPreview } = useMemo(() => {
+    const regularPosts: TPostPreview[] = [];
+    let pinned: TPostPreview | undefined;
 
-  posts.forEach(({ slug, frontMatter }) => {
-    const { shares, views } = data[slug]
-      ? data[slug].meta
-      : { shares: 0, views: 0 };
+    posts.forEach(({ slug, frontMatter }) => {
+      const { shares = 0, views = 0 } = data?.[slug]?.meta ?? {};
 
-    const preview: TPostPreview = {
-      slug,
-      views,
-      shares,
-      ...frontMatter,
-    };
+      const preview: TPostPreview = {
+        slug,
+        views,
+        shares,
+        ...frontMatter,
+      };
 
-    if (slug === PINNED_POST) {
-      pinnedPost = preview;
-    } else {
-      postsPreview.push(preview);
-    }
-  });
+      if (slug === PINNED_POST) {
+        pinned = preview;
+      } else {
+        regularPosts.push(preview);
+      }
+    });
+
+    return { pinnedPost: pinned, postsPreview: regularPosts };
+  }, [posts, data]);
 
   return (
-    <div className={clsx('content-wrapper')}>
-      <div
-        className={clsx(
-          'flex flex-col gap-8',
-          'md:flex-row md:gap-8 lg:gap-24'
-        )}
-      >
-        <div className={clsx('md:w-64')}>{/* TODO: Filter Posts */}</div>
-        <div className={clsx('flex-1')}>
+    <div className="content-wrapper">
+      <div className="flex flex-col gap-8 md:flex-row md:gap-8 lg:gap-24">
+        <aside className="md:w-64">{/* Filter logic goes here */}</aside>
+
+        <main className="flex-1">
+          {/* Pinned Post */}
           {pinnedPost && (
-            <div
-              className={clsx(
-                'mb-8 flex items-start gap-4',
-                'md:mb-12 md:gap-6'
-              )}
-            >
-              <div className={clsx('flex-1')}>
+            <div className="mb-8 flex items-start gap-4 md:mb-12 md:gap-6">
+              <div className="flex-1">
                 <PostPreview
                   pinned
                   slug={pinnedPost.slug}
@@ -80,49 +75,37 @@ function BlogContents({ posts }: BlogContentsProps) {
             </div>
           )}
 
-          {postsPreview.map(
-            ({
-              slug,
-              category,
-              title,
-              description,
-              date,
-              lang,
-              tags,
-              views,
-              shares,
-            }) => (
+          {/* Posts List */}
+          <section className="flex flex-col">
+            {postsPreview.map((post) => (
               <div
-                key={slug}
-                className={clsx(
-                  'mb-8 flex items-start gap-4',
-                  'md:mb-4 md:gap-6'
-                )}
+                key={post.slug}
+                className="mb-8 flex items-start gap-4 md:mb-4 md:gap-6"
               >
                 <div
                   className={clsx(
-                    'border-divider-light mt-14 hidden w-8 -translate-y-1 border-b',
-                    'md:mt-16 md:w-20 lg:block',
+                    'border-divider-light mt-14 hidden w-8 -translate-y-1 border-b md:mt-16 md:w-20 lg:block',
                     'dark:border-divider-dark'
                   )}
+                  aria-hidden="true"
                 />
-                <div className={clsx('flex-1')}>
+                <div className="flex-1">
                   <PostPreview
-                    slug={slug}
-                    category={category}
-                    title={title}
-                    description={description}
-                    date={date}
-                    lang={lang}
-                    tags={tags}
-                    views={views}
-                    shares={shares}
+                    slug={post.slug}
+                    category={post.category}
+                    title={post.title}
+                    description={post.description}
+                    date={post.date}
+                    lang={post.lang}
+                    tags={post.tags}
+                    views={post.views}
+                    shares={post.shares}
                   />
                 </div>
               </div>
-            )
-          )}
-        </div>
+            ))}
+          </section>
+        </main>
       </div>
     </div>
   );

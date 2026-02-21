@@ -16,7 +16,7 @@ export const postReaction = async ({
   contentTitle: string;
   type: ReactionType;
   count: number;
-  section: string;
+  section?: string;
 }) => {
   try {
     await axios.post<TApiResponse>(`/api/reactions/${slug}`, {

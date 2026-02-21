@@ -1,6 +1,5 @@
 import { ContentType, ReactionType, ShareType } from '@prisma/client';
-import merge from 'lodash/merge';
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import useSWR from 'swr';
 
 import fetcher from '@/utils/fetcher';
@@ -13,18 +12,10 @@ const INITIAL_VALUE: TContentMetaDetail = {
     views: 0,
     shares: 0,
     reactions: 0,
-    reactionsDetail: {
-      CLAPPING: 0,
-      THINKING: 0,
-      AMAZED: 0,
-    },
+    reactionsDetail: { CLAPPING: 0, THINKING: 0, AMAZED: 0 },
   },
   metaUser: {
-    reactionsDetail: {
-      CLAPPING: 0,
-      THINKING: 0,
-      AMAZED: 0,
-    },
+    reactionsDetail: { CLAPPING: 0, THINKING: 0, AMAZED: 0 },
   },
   metaSection: {},
 };
@@ -40,97 +31,101 @@ export default function useInsight({
   contentTitle: string;
   countView?: boolean;
 }) {
-  // #region handle for batch click
-  const timer = useRef<Record<ReactionType, NodeJS.Timeout>>({
-    CLAPPING: null,
-    THINKING: null,
-    AMAZED: null,
-  });
-  const count = useRef<Record<ReactionType, number>>({
+  const timer = useRef<Record<string, ReturnType<typeof setTimeout>>>({});
+  const count = useRef<Record<string, number>>({
     CLAPPING: 0,
     THINKING: 0,
     AMAZED: 0,
   });
-  // #endregion
 
-  const { isLoading, data, mutate } = useSWR<TContentMetaDetail>(
-    `/api/content/${slug}`,
+  const {
+    isLoading,
+    data = INITIAL_VALUE,
+    mutate,
+  } = useSWR<TContentMetaDetail>(
+    slug ? `/api/content/${slug}` : null,
     fetcher,
-    {
-      fallbackData: INITIAL_VALUE,
-    }
+    { fallbackData: INITIAL_VALUE }
   );
 
-  // post view count
+  // Clean up timers on unmount to prevent memory leaks
   useEffect(() => {
-    if (countView) {
+    const currentTimers = timer.current;
+    return () => {
+      Object.values(currentTimers).forEach(clearTimeout);
+    };
+  }, []);
+
+  // Track views
+  useEffect(() => {
+    if (countView && slug) {
       postView({ slug, contentType, contentTitle });
     }
   }, [slug, contentType, contentTitle, countView]);
 
-  const addShare = ({ type }: { type: ShareType }) => {
-    // optimistic update
-    mutate(
-      merge({}, data, {
-        meta: {
-          shares: data.meta.shares + 1,
+  const addShare = useCallback(
+    ({ type }: { type: ShareType }) => {
+      mutate(
+        {
+          ...data,
+          meta: { ...data.meta, shares: data.meta.shares + 1 },
         },
-      }),
-      false
-    );
+        false
+      );
 
-    postShare({
-      slug,
-      contentType,
-      contentTitle,
-      type,
-    });
-  };
+      postShare({ slug, contentType, contentTitle, type });
+    },
+    [data, mutate, slug, contentType, contentTitle]
+  );
 
-  const addReaction = ({
-    type,
-    section = undefined,
-  }: {
-    type: ReactionType;
-    section?: string;
-  }) => {
-    // optimistic update
-    mutate(
-      merge({}, data, {
-        meta: {
-          reactions: data.meta.reactions + 1,
-          reactionsDetail: {
-            [type]: data.meta.reactionsDetail[type] + 1,
+  const addReaction = useCallback(
+    ({ type, section }: { type: ReactionType; section?: string }) => {
+      // 1. Optimistic Update using a functional state update
+      mutate((currentData) => {
+        // Fallback to initial if currentData is undefined
+        const prev = currentData ?? INITIAL_VALUE;
+
+        return {
+          ...prev,
+          meta: {
+            ...prev.meta,
+            reactions: prev.meta.reactions + 1,
+            reactionsDetail: {
+              ...prev.meta.reactionsDetail,
+              [type]: (prev.meta.reactionsDetail[type] || 0) + 1,
+            },
           },
-        },
-        metaUser: {
-          reactionsDetail: {
-            [type]: data.metaUser.reactionsDetail[type] + 1,
+          metaUser: {
+            ...prev.metaUser,
+            reactionsDetail: {
+              ...prev.metaUser.reactionsDetail,
+              [type]: (prev.metaUser.reactionsDetail[type] || 0) + 1,
+            },
           },
-        },
-      }),
-      false
-    );
+        };
+      }, false);
 
-    // increment the current batch click count
-    count.current[type] += 1;
+      // 2. Batching Logic (Same as before)
+      count.current[type] += 1;
 
-    // debounce the batch click for sending the reaction data
-    clearTimeout(timer.current[type]);
-    timer.current[type] = setTimeout(() => {
-      postReaction({
-        slug,
-        contentType,
-        contentTitle,
-        type,
-        count: count.current[type],
-        section,
-      }).finally(() => {
-        // reset the batch click count to zero for the next batch
-        count.current[type] = 0;
-      });
-    }, 500);
-  };
+      clearTimeout(timer.current[type]);
+      timer.current[type] = setTimeout(() => {
+        const batchCount = count.current[type];
+
+        postReaction({
+          slug,
+          contentType,
+          contentTitle,
+          type,
+          count: batchCount,
+          ...(section ? { section } : {}), // Clean way to conditionally add 'section'
+        }).finally(() => {
+          count.current[type] = 0;
+        });
+      }, 500);
+    },
+    [mutate, slug, contentType, contentTitle] // 'data' is no longer a dependency!
+  );
 
   return {
     isLoading,
