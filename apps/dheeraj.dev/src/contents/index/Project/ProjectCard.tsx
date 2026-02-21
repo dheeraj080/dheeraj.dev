@@ -56,8 +56,9 @@ const COL_MAP = {
   2: 'md:col-span-2',
   3: 'md:col-span-3',
   4: 'md:col-span-4',
-};
-const ROW_MAP = { 1: 'md:row-span-1', 2: 'md:row-span-2' };
+} as const;
+
+const ROW_MAP = { 1: 'md:row-span-1', 2: 'md:row-span-2' } as const;
 
 const SIZE_PRESETS: Record<CardSizePreset, string> = {
   xs: 'md:col-span-1 md:row-span-1 h-[260px]',
@@ -141,7 +142,6 @@ const ProjectCard = memo(({ project }: { project: Project }) => {
       transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
       className={cn(
         'group relative flex flex-col overflow-hidden rounded-[28px]',
-        // New style: gradient border + glassy surface
         'bg-gradient-to-b from-white/10 via-white/5 to-white/0 p-[1px]',
         'transition-transform duration-500 hover:-translate-y-0.5',
         sizeClasses
@@ -232,8 +232,7 @@ const ProjectCard = memo(({ project }: { project: Project }) => {
                 'focus:outline-none focus:ring-2 focus:ring-white/30'
               )}
             >
-              {primaryCta.label}
-              <ArrowUpRight className="h-4 w-4" />
+              {primaryCta.label} <ArrowUpRight className="h-4 w-4" />
             </a>
           )}
 
@@ -251,7 +250,7 @@ const ProjectCard = memo(({ project }: { project: Project }) => {
                   'focus:outline-none focus:ring-2 focus:ring-white/20'
                 )}
               >
-                {readMoreCta.label}
+                {readMoreCta.label}{' '}
                 <ArrowUpRight className="h-4 w-4 text-white/80" />
               </a>
             ) : (
@@ -265,7 +264,7 @@ const ProjectCard = memo(({ project }: { project: Project }) => {
                   'focus:outline-none focus:ring-2 focus:ring-white/20'
                 )}
               >
-                {readMoreCta.label}
+                {readMoreCta.label}{' '}
                 <ArrowUpRight className="h-4 w-4 text-white/80" />
               </Link>
             ))}
