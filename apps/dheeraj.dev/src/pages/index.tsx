@@ -31,7 +31,7 @@ function Index({ allPosts }: IndexProps) {
 
 export async function getStaticProps() {
   // Fetch latest 3 posts at build time
-  const allPosts = getSortedPosts().slice(0, 3);
+  const allPosts = getSortedPosts().slice(0, 6);
 
   return {
     props: {
