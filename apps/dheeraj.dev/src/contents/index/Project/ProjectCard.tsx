@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from 'clsx';
 import { m } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import { memo, useMemo } from 'react';
 import { twMerge } from 'tailwind-merge';
 
@@ -199,6 +200,26 @@ const ProjectCard = memo(({ project }: { project: Project }) => {
             >
               <GitHubIcon className="h-5 w-5 text-white transition-transform group-hover/icon:scale-110" />
             </a>
+          )}
+
+          {project.readMore && (
+            <Link
+              href={project.readMore}
+              className="group/link flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-zinc-400 transition-colors hover:text-white"
+            >
+              <span>Read More</span>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                className="h-4 w-4 transition-transform group-hover/link:translate-x-1"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M5 12h14m-7-7 7 7-7 7" />
+              </svg>
+            </Link>
           )}
         </div>
       </footer>

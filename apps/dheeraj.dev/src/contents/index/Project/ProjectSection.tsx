@@ -13,8 +13,7 @@ const projects: Project[] = [
       'To add an extended description that appears on hover, we can leverage Tailwind’s group-hover utility combined with Framer Motion for a smooth transition.',
     role: 'Product Design',
     year: '2024',
-    thumbnail:
-      'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=800&q=80',
+    thumbnail: '/assets/images/gettyimages-1305475332-612x612.jpg',
     url: 'https://dheeraj080.github.io/StarMaps/',
     github: 'https://github.com/dheeraj080/StarMaps',
     readMore: '/projects/StarMaps',

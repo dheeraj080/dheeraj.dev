@@ -14,6 +14,9 @@ importers:
       tailwind-merge:
         specifier: ^3.5.0
         version: 3.5.0
+      tailwind-scrollbar-hide:
+        specifier: ^4.0.0
+        version: 4.0.0(tailwindcss@3.4.17)
     devDependencies:
       eslint:
         specifier: ^8.57.1
@@ -2918,6 +2921,11 @@ packages:
 
   tailwind-merge@3.5.0:
     resolution: {integrity: sha512-I8K9wewnVDkL1NTGoqWmVEIlUcB9gFriAEkXkfCjX5ib8ezGxtR3xD7iZIxrfArjEsH7F1CHD4RFUtxefdqV/A==}
+
+  tailwind-scrollbar-hide@4.0.0:
+    resolution: {integrity: sha512-gobtvVcThB2Dxhy0EeYSS1RKQJ5baDFkamkhwBvzvevwX6L4XQfpZ3me9s25Ss1ecFVT5jPYJ50n+7xTBJG9WQ==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || >= 4.0.0 || >= 4.0.0-beta.8 || >= 4.0.0-alpha.20'
 
   tailwindcss-accent@2.1.2:
     resolution: {integrity: sha512-Yjxpf7ViuE8NKOxtQiFCI8ACZ/I6TpRGZNkaTmPHWkjBYcP0MOVNWVODkmvvbJD786npABB0xfmtqDUP7ouoAg==}
@@ -6353,6 +6361,10 @@ snapshots:
       use-sync-external-store: 1.4.0(react@18.3.1)
 
   tailwind-merge@3.5.0: {}
+
+  tailwind-scrollbar-hide@4.0.0(tailwindcss@3.4.17):
+    dependencies:
+      tailwindcss: 3.4.17
 
   tailwindcss-accent@2.1.2(tailwindcss@3.4.17):
     dependencies:
