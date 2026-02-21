@@ -1,6 +1,5 @@
 import clsx from 'clsx';
-import { m, useAnimationControls } from 'framer-motion';
-import Image from 'next/image';
+import { m } from 'framer-motion';
 
 const animation = {
   hide: { x: -32, opacity: 0 },
@@ -11,8 +10,6 @@ const animation = {
 };
 
 function HeaderTitle() {
-  const controls = useAnimationControls();
-
   return (
     <div>
       <m.div
