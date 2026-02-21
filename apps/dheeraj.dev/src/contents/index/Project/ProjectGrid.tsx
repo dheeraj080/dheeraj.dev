@@ -1,22 +1,30 @@
-import { ReactNode } from 'react';
+import { m } from 'framer-motion';
 
 import { cn } from '@/lib/utils';
 
-interface ProjectGridProps {
-  children: ReactNode;
-  className?: string;
-}
+import ProjectCard from './ProjectCard/ProjectCard';
+import { type Project } from './ProjectCard/types';
 
-// Fixed by adding = '' as a default value for the optional className prop
-export function ProjectGrid({ children, className = '' }: ProjectGridProps) {
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
+  },
+};
+
+export default function ProjectGrid({ projects }: { projects: Project[] }) {
   return (
-    <div
-      className={cn(
-        'grid grid-cols-1 gap-6 md:grid-flow-row-dense md:grid-cols-4',
-        className
-      )}
+    <m.div
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
     >
-      {children}
-    </div>
+      {projects.map((project) => (
+        <ProjectCard key={project.id} project={project} />
+      ))}
+    </m.div>
   );
 }

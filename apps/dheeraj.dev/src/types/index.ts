@@ -29,6 +29,7 @@ export type TPostFrontMatter = TBaseFrontMatter & {
   lang: 'id' | 'en';
   tags: Array<string>;
   category: string;
+  image?: string;
 };
 
 export type TPostOgImage = Partial<
