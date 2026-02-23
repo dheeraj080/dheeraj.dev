@@ -9,7 +9,7 @@ export const projects: Project[] = [
     role: 'Product Design',
     year: '2024',
     thumbnail: '/assets/images/gettyimages-1305475332-612x612.jpg',
-    url: 'https://dheeraj080.github.io/StarMaps/',
+    url: 'https://starmaps-pi.vercel.app/',
     github: 'https://github.com/dheeraj080/StarMaps',
     readMore: '/projects/StarMaps',
     size: 'large',
