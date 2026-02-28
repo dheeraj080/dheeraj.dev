@@ -1,71 +1,91 @@
-<div>
-  <h1>
-    Enji Kusnadi
-    &middot;
-    <img src="https://img.shields.io/website?style=flat-square&url=https%3A%2F%2Fwww.enji.dev"/>
-    <img src="https://img.shields.io/github/deployments/enjidev/enji.dev/production?label=production&style=flat-square"/>
-    <img src="https://img.shields.io/github/commit-activity/m/enjidev/enji.dev?style=flat-square"/>
-  </h1>
-</div>
+# Magic Portfolio
 
-A monorepo for my personal website and projects, built with Turborepo and pnpm.
+Magic Portfolio is a simple, clean, beginner-friendly portfolio template. It supports an MDX-based content system for projects and blog posts, an about / CV page and a gallery.
 
-## 📘 [enji.dev](https://www.enji.dev)
+View the demo [here](https://demo.magic-portfolio.com).
 
-A personal website with a blog, project showcase, and work information.
+![Magic Portfolio](public/images/og/home.jpg)
 
-https://user-images.githubusercontent.com/95107212/210668021-fd49431f-85a3-4bd7-bf9e-09639cb38922.mp4
+## Getting started
 
-### Tech Stack
-
-- 🚀 Next.js + TypeScript
-- ➰ Framer Motion
-- 🍃 Tailwind CSS
-- ✍ MDX
-
-### Running the Project
-
-To get started, I recommend [installing pnpm](https://pnpm.io/installation) since it's the package manager used in this repository.
-
-Begin by forking the repository and then cloning it to your local machine:
-
+**1. Clone the repository**
 ```
-git clone <your-fork>
+git clone https://github.com/once-ui-system/magic-portfolio.git
 ```
 
-Navigate to the project's root directory:
-
+**2. Install dependencies**
 ```
-cd ./enji.dev
-```
-
-Next, copy the development version of the `env` file:
-
-```
-cp ./apps/enji.dev/env.example ./apps/enji.dev/env.local
+npm install
 ```
 
-Now, you have the `env.local` file ready for configuration:
-
+**3. Run dev server**
 ```
-DATABASE_URL = your-database-connection-string
-SALT_IP_ADDRESS = super-secret
+npm run dev
 ```
 
-For the `DATABASE_URL` use your database connection string. I personally use the free version of [MongoDB](https://www.mongodb.com/), and you can do the same by creating a database there and [adding the connection string](https://www.mongodb.com/basics/mongodb-connection-string) to the `env.local`.
-
-As for `SALT_IP_ADDRESS`, feel free to fill it with some of your secret words. It acts as a salt for hashing users' IP addresses.
-
-Once configuration is complete, still at the root of the project directory, install the required dependencies:
-
+**4. Edit config**
 ```
-pnpm install
+src/resources/once-ui.config.js
 ```
 
-Finally, run the project:
-
+**5. Edit content**
 ```
-pnpm dev
+src/resources/content.js
 ```
 
-Now, your project should be up and running smoothly!
+**6. Create blog posts / projects**
+```
+Add a new .mdx file to src/app/blog/posts or src/app/work/projects
+```
+
+Magic Portfolio was built with [Once UI](https://once-ui.com) for [Next.js](https://nextjs.org). It requires Node.js v18.17+.
+
+## Documentation
+
+Docs available at: [docs.once-ui.com](https://docs.once-ui.com/docs/magic-portfolio/quick-start)
+
+## Features
+
+### Once UI
+- All tokens, components & features of [Once UI](https://once-ui.com)
+
+### SEO
+- Automatic open-graph and X image generation with next/og
+- Automatic schema and metadata generation based on the content file
+
+### Design
+- Responsive layout optimized for all screen sizes
+- Timeless design without heavy animations and motion
+- Endless customization options through [data attributes](https://once-ui.com/docs/theming)
+
+### Content
+- Render sections conditionally based on the content file
+- Enable or disable pages for blog, work, gallery and about / CV
+- Generate and display social links automatically
+- Set up password protection for URLs
+
+### Localization
+- A localized, earlier version of Magic Portfolio is available with the next-intl library
+- To use localization, switch to the 'i18n' branch
+
+## Creators
+
+Lorant One: [Threads](https://www.threads.net/@lorant.one) / [LinkedIn](https://www.linkedin.com/in/lorant-one/)
+
+## Get involved
+
+- Join the Design Engineers Club on [Discord](https://discord.com/invite/5EyAQ4eNdS) and share your project with us!
+- Deployed your docs? Share it on the [Once UI Hub](https://once-ui.com/hub) too! We feature our favorite apps on our landing page.
+
+## License
+
+Distributed under the CC BY-NC 4.0 License.
+- Attribution is required.
+- Commercial usage is not allowed.
+- You can extend the license to [Dopler CC](https://dopler.app/license) by purchasing a [Once UI Pro](https://once-ui.com/pricing) license.
+
+See `LICENSE.txt` for more information.
+
+## Deploy with Vercel
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fonce-ui-system%2Fmagic-portfolio&project-name=portfolio&repository-name=portfolio&redirect-url=https%3A%2F%2Fgithub.com%2Fonce-ui-system%2Fmagic-portfolio&demo-title=Magic%20Portfolio&demo-description=Showcase%20your%20designers%20or%20developer%20portfolio&demo-url=https%3A%2F%2Fdemo.magic-portfolio.com&demo-image=%2F%2Fraw.githubusercontent.com%2Fonce-ui-system%2Fmagic-portfolio%2Fmain%2Fpublic%2Fimages%2Fog%2Fhome.jpg)
