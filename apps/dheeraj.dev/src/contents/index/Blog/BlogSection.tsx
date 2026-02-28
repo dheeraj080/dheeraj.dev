@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
 
@@ -19,21 +18,25 @@ export default function BlogSection({
   initialCount = 6,
   step = 6,
 }: BlogSectionProps) {
-  const [count, setCount] = useState(initialCount);
+  const [displayLimit, setDisplayLimit] = useState(initialCount);
 
-  const visiblePosts = useMemo(() => posts.slice(0, count), [posts, count]);
-  const hasMore = count < posts.length;
+  const visiblePosts = useMemo(
+    () => posts.slice(0, displayLimit),
+    [posts, displayLimit]
+  );
+
+  const hasMore = displayLimit < posts.length;
+
+  const handleShowMore = () => {
+    setDisplayLimit((prev) => Math.min(prev + step, posts.length));
+  };
 
   return (
-    <div className="content-wrapper">
-      <div
-        className={clsx(
-          'mb-8 flex flex-col gap-2',
-          'md:flex-row md:items-end md:justify-between'
-        )}
-      >
-        <div className="flex flex-col gap-1">
-          <h2 className="text-2xl font-black text-slate-900 md:text-3xl dark:text-slate-200">
+    <section className="content-wrapper space-y-12 py-12">
+      {/* 1. Header Section - Clean Slate Colors */}
+      <header className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <div className="space-y-2">
+          <h2 className="text-3xl font-bold tracking-tight text-slate-800 md:text-4xl dark:text-slate-100">
             Latest Blog Posts
           </h2>
           <p className="text-slate-600 dark:text-slate-400">
@@ -41,18 +44,17 @@ export default function BlogSection({
           </p>
         </div>
 
+        {/* FIX: Switched from text-blue to text-accent (Synced with ProjectCard) */}
         <Link
           href="/blog"
-          className="text-sm font-bold text-blue-600 hover:underline dark:text-blue-400"
+          className="text-accent-600 hover:text-accent-700 dark:text-accent-400 dark:hover:text-accent-300 text-sm font-bold transition-colors"
         >
           View all articles →
         </Link>
-      </div>
-      <div className="mb-4 text-xs text-zinc-500">
-        posts.length: {posts.length} | showing: {visiblePosts.length}
-      </div>
+      </header>
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {/* 2. Grid Layout - Spacing synced with Project Grid */}
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {visiblePosts.map((post) => (
           <PostCard
             key={post.slug}
@@ -62,21 +64,18 @@ export default function BlogSection({
         ))}
       </div>
 
+      {/* 3. Pagination - Using your .button styles from globals.css */}
       {hasMore && (
-        <div className="mt-10 flex justify-center">
+        <footer className="flex justify-center pt-8">
           <button
             type="button"
-            onClick={() => setCount((c) => Math.min(c + step, posts.length))}
-            className={clsx(
-              'rounded-md px-4 py-2 text-sm font-medium',
-              'border border-white/10 bg-white/[0.04] text-white',
-              'transition-colors hover:bg-white/[0.06]'
-            )}
+            onClick={handleShowMore}
+            className="button button--outline px-8"
           >
-            Show more
+            Show more posts
           </button>
-        </div>
+        </footer>
       )}
-    </div>
+    </section>
   );
 }
