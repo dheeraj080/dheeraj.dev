@@ -27,8 +27,10 @@ const TimeDisplay: React.FC<TimeDisplayProps> = ({
   locale = "en-GB",
 }) => {
   const [currentTime, setCurrentTime] = useState("");
+  const [isMounted, setIsMounted] = useState(false); // Add this
 
   useEffect(() => {
+    setIsMounted(true); // Flag that we are now on the client
     const updateTime = () => {
       const now = new Date();
       const options: Intl.DateTimeFormatOptions = {
@@ -44,9 +46,11 @@ const TimeDisplay: React.FC<TimeDisplayProps> = ({
 
     updateTime();
     const intervalId = setInterval(updateTime, 1000);
-
     return () => clearInterval(intervalId);
   }, [timeZone, locale]);
+
+  // If not mounted, return null or a placeholder to match server HTML
+  if (!isMounted) return null;
 
   return <>{currentTime}</>;
 };
@@ -178,6 +182,7 @@ export const Header = () => {
                   </Row>
                 </>
               )}
+              {/*
               {routes["/gallery"] && (
                 <>
                   <Row s={{ hide: true }}>
@@ -197,6 +202,7 @@ export const Header = () => {
                   </Row>
                 </>
               )}
+                    */}
               {display.themeSwitcher && (
                 <>
                   <Line background="neutral-alpha-medium" vert maxHeight="24" />
