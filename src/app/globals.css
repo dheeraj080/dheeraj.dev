@@ -1,0 +1,873 @@
+@import "tailwindcss";
+
+/* ─── DESIGN TOKENS ─────────────────────────────────────────────── */
+@theme inline {
+  --color-void:     #0F0F11;
+  --color-ivory:    #F3F4F6;
+  --color-signal:   #F97316;
+  --color-electric: #8B5CF6;
+  --color-mid:      #1F2937;
+  --color-dim:      #4B5563;
+
+  --font-display:   var(--font-bebas);
+  --font-condensed: var(--font-barlow);
+  --font-mono:      var(--font-spacemono);
+}
+
+/* ─── BASE ───────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, a, button, [role="button"], input, textarea, select, label, summary {
+  cursor: none !important;
+}
+
+html {
+  background: #0F0F11;
+  color: #F3F4F6;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-spacemono), 'Courier New', monospace;
+  background: #0F0F11;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #F97316;
+  color: #0F0F11;
+}
+
+/* ─── TYPOGRAPHY SCALE (Magazine-style) ──────────────────────────── */
+.text-display {
+  font-family: var(--font-bebas), 'Impact', sans-serif;
+  line-height: 0.88;
+  letter-spacing: -0.01em;
+  font-weight: 400; /* Bebas Neue is inherently black */
+}
+
+.text-condensed {
+  font-family: var(--font-barlow), 'Arial Narrow', sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 0.92;
+}
+
+.text-mono {
+  font-family: var(--font-spacemono), 'Courier New', monospace;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* ─── GRAIN OVERLAY (magazine paper texture) ─────────────────────── */
+.grain-layer {
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 9000;
+  opacity: 0.045;
+  animation: grain-shift 0.8s steps(1) infinite;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+@keyframes grain-shift {
+  0%   { transform: translate(0, 0); }
+  10%  { transform: translate(-3%, -7%); }
+  20%  { transform: translate(5%, 3%); }
+  30%  { transform: translate(-2%, 8%); }
+  40%  { transform: translate(7%, -4%); }
+  50%  { transform: translate(-5%, 6%); }
+  60%  { transform: translate(3%, -9%); }
+  70%  { transform: translate(-8%, 2%); }
+  80%  { transform: translate(6%, 7%); }
+  90%  { transform: translate(-4%, -3%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* ─── FLOR LOGO FLOAT ────────────────────────────────────────────── */
+@keyframes flor-float {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  25%  { transform: translate(3px, -4px) rotate(0.5deg); }
+  50%  { transform: translate(-2px, 2px) rotate(-0.3deg); }
+  75%  { transform: translate(4px, 3px) rotate(0.4deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+.flor-float {
+  animation: flor-float 8s ease-in-out infinite;
+}
+
+/* ─── BLOG CONTENT (MDX) ─────────────────────────────────────────── */
+.blog-content {
+  font-family: var(--font-spacemono), 'Courier New', monospace;
+  font-size: 1.125rem;
+  line-height: 1.9;
+  color: #0F0F11;
+  opacity: 0.9;
+}
+
+.blog-content h2 {
+  font-family: var(--font-bebas), 'Impact', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  line-height: 1;
+  margin-top: 4rem;
+  margin-bottom: 1.5rem;
+  color: #F97316;
+  letter-spacing: 0.02em;
+}
+
+.blog-content h3 {
+  font-family: var(--font-bebas), 'Impact', sans-serif;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  line-height: 1.1;
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+  color: #0F0F11;
+}
+
+.blog-content p {
+  margin-bottom: 2rem;
+}
+
+.blog-content a {
+  color: #F97316;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(249, 115, 22, 0.3);
+  transition: border-color 0.2s ease;
+}
+
+.blog-content a:hover {
+  border-bottom-color: #F97316;
+}
+
+.blog-content ul, .blog-content ol {
+  margin-bottom: 2rem;
+  padding-left: 1.5rem;
+}
+
+.blog-content li {
+  margin-bottom: 0.75rem;
+  line-height: 1.8;
+}
+
+.blog-content blockquote {
+  border-left: 3px solid #F97316;
+  padding-left: 1.5rem;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 2rem;
+  font-style: italic;
+  opacity: 0.85;
+  font-size: 1.25rem;
+  line-height: 1.7;
+}
+
+.blog-content code {
+  font-family: var(--font-spacemono), monospace;
+  background: rgba(10, 10, 10, 0.06);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.85em;
+  color: #1F2937;
+}
+
+.blog-content pre {
+  background: #0F0F11;
+  color: #F3F4F6;
+  padding: 1.75rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin-bottom: 2.5rem;
+  border: 1px solid rgba(226, 232, 240, 0.1);
+}
+
+.blog-content pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.blog-content strong {
+  font-weight: 700;
+  color: #F97316;
+}
+
+/* ─── SCROLL LOCK ────────────────────────────────────────────────── */
+html.locked {
+  overflow: hidden;
+}
+
+/* ─── SECTION LABELS (magazine column label style) ───────────────── */
+.section-label {
+  font-family: var(--font-spacemono), monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #F97316;
+  opacity: 0.9;
+}
+
+/* ─── CUSTOM CURSOR ──────────────────────────────────────────────── */
+.cursor-main {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  background: #F3F4F6;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-spacemono), monospace;
+  font-size: 4px;
+  font-weight: bold;
+  color: #0F0F11;
+  opacity: 0;
+}
+
+/* ─── PRELOADER ──────────────────────────────────────────────────── */
+.preloader {
+  position: fixed;
+  inset: 0;
+  background: #0F0F11;
+  z-index: 8000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 4rem;
+  overflow: hidden;
+}
+
+.preloader-counter {
+  font-family: var(--font-spacemono), monospace;
+  font-size: clamp(4rem, 12vw, 10rem);
+  color: #F3F4F6;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.preloader-label {
+  font-family: var(--font-spacemono), monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #F97316;
+  margin-top: 1rem;
+}
+
+.preloader-wave {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%);
+  opacity: 0.15;
+}
+
+/* ─── HERO ───────────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: clip;
+  overflow-y: visible;
+  background: #0F0F11;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.hero-name-line {
+  font-family: var(--font-bebas), 'Impact', sans-serif;
+  font-size: clamp(18vw, 22vw, 24vw);
+  line-height: 0.85;
+  color: #F3F4F6;
+  white-space: nowrap;
+  overflow: visible;
+  position: relative;
+  display: block;
+}
+
+/* Magazine bleed — first line slightly left-offset */
+.hero-name-line:first-of-type {
+  margin-left: -0.03em;
+}
+
+.hero-name-line:last-of-type {
+  color: #F97316; /* Signal red second line — like Street Culture CULTURE in red */
+}
+
+
+.hero-meta {
+  position: absolute;
+  right: clamp(1.5rem, 4vw, 5rem);
+  bottom: max(1.5rem, calc(clamp(5rem, 12vh, 14rem) - 4rem));
+  text-align: right;
+}
+
+.hero-role {
+  font-family: var(--font-spacemono), monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #F3F4F6;
+  opacity: 0.6;
+}
+
+.hero-scroll-hint {
+  font-family: var(--font-spacemono), monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #F97316;
+  margin-top: 0.5rem;
+}
+
+/* Magazine-style page number */
+.hero-folio {
+  position: absolute;
+  left: clamp(1.5rem, 4vw, 5rem);
+  bottom: max(1.5rem, calc(clamp(5rem, 12vh, 14rem) - 4rem));
+  font-family: var(--font-spacemono), monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #F3F4F6;
+  opacity: 0.3;
+}
+
+.hero-signal-line {
+  position: absolute;
+  bottom: calc(clamp(5rem, 12vh, 14rem) - 1.5rem);
+  left: clamp(1.5rem, 4vw, 5rem);
+  right: clamp(1.5rem, 4vw, 5rem);
+  height: 1px;
+  background: #F97316;
+}
+
+/* Waveform behind name */
+.hero-waveform {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  opacity: 0.06;
+}
+
+/* ─── MANIFESTO ──────────────────────────────────────────────────── */
+.manifesto {
+  position: relative;
+  background: #0F0F11;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.manifesto-inner {
+  padding: 0 clamp(2rem, 6vw, 8rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  gap: 0;
+}
+
+/*
+  Ray Gun-style: words are NOT center-aligned.
+  Each line has its own lateral position for maximum editorial tension.
+*/
+.manifesto-line {
+  display: block;
+  font-family: var(--font-bebas), 'Impact', sans-serif;
+  font-size: clamp(6vw, 9vw, 11vw);
+  line-height: 0.87;
+  letter-spacing: -0.01em;
+  color: #4B5563; /* start dark — ghost state */
+  transition: none; /* GSAP controls this */
+  overflow: visible;
+}
+
+.manifesto-line:nth-child(1) { padding-left: 0; }
+.manifesto-line:nth-child(2) { padding-left: clamp(2rem, 8vw, 10rem); color: #1F2937; }
+.manifesto-line:nth-child(3) { padding-left: clamp(4rem, 16vw, 20rem); color: #141414; }
+
+.manifesto-waveform-wrap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
+/* ─── DUALITY ────────────────────────────────────────────────────── */
+.duality {
+  position: relative;
+  background: #0F0F11;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.duality-inner {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  min-height: 100vh;
+}
+
+.duality-col {
+  padding: clamp(4rem, 8vw, 10rem) clamp(2rem, 5vw, 6rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.duality-divider {
+  background: #4B5563;
+  position: relative;
+  overflow: hidden;
+}
+
+.duality-divider-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #F97316;
+  transform: scaleY(0);
+  transform-origin: top center;
+}
+
+.duality-col-label {
+  font-family: var(--font-spacemono), monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #F97316;
+  margin-bottom: 3rem;
+}
+
+.duality-heading {
+  font-family: var(--font-bebas), 'Impact', sans-serif;
+  font-size: clamp(4rem, 7vw, 9rem);
+  line-height: 0.88;
+  color: #F3F4F6;
+  margin-bottom: 3rem;
+}
+
+.duality-item {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #1F2937;
+  overflow: hidden;
+}
+
+.duality-item-key {
+  font-family: var(--font-spacemono), monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #F97316;
+  min-width: 6rem;
+  flex-shrink: 0;
+}
+
+.duality-item-val {
+  font-family: var(--font-spacemono), monospace;
+  font-size: 0.875rem;
+  color: #F3F4F6;
+  opacity: 0.7;
+}
+
+/* ─── WORK ───────────────────────────────────────────────────────── */
+.work {
+  position: relative;
+  overflow: hidden;
+  background: #0F0F11;
+}
+
+.work-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.work-card {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  flex-shrink: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+/*
+  Magazine spread approach:
+  Project title at massive scale overlapping the imagery
+  (like STREET / CULTURE spanning the spread)
+*/
+.work-card-bg {
+  position: absolute;
+  inset: 0;
+  filter: contrast(1.2) grayscale(0.3); /* halftone-adjacent treatment */
+}
+
+.work-card-overlay {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: multiply;
+}
+
+.work-card-bg-img {
+  object-fit: cover;
+  z-index: 1;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.work-card-bg-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Giant type overlapping the card — Ray Gun style */
+.work-card-title {
+  position: absolute;
+  top: 50%;
+  left: clamp(2rem, 5vw, 6rem);
+  transform: translateY(-50%);
+  font-family: var(--font-bebas), 'Impact', sans-serif;
+  font-size: clamp(18vw, 26vw, 30vw);
+  line-height: 0.82;
+  color: #F3F4F6;
+  /* No mix-blend-mode — overlay mode collapses to invisible on near-black bgs */
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 3;
+  /* Clip reveal state — animated by GSAP */
+  clip-path: inset(0 100% 0 0);
+}
+
+.work-card-info {
+  position: relative;
+  z-index: 3;
+  padding: 3rem 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+  gap: 2rem;
+}
+
+.work-card-number {
+  font-family: var(--font-spacemono), monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.3em;
+  color: #F97316;
+  position: absolute;
+  top: 3rem;
+  left: 4rem;
+}
+
+.work-card-desc {
+  font-family: var(--font-spacemono), monospace;
+  font-size: 0.75rem;
+  color: #F3F4F6;
+  opacity: 0.6;
+  line-height: 1.6;
+  max-width: none;
+}
+
+.work-card-stack {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.work-card-tag {
+  font-family: var(--font-spacemono), monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #0F0F11;
+  background: #F3F4F6;
+  padding: 0.25rem 0.5rem;
+}
+
+.work-card-link {
+  font-family: var(--font-spacemono), monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #F97316;
+  text-decoration: none;
+  border-bottom: 1px solid #F97316;
+  padding-bottom: 2px;
+}
+
+/* ─── RIGHT NOW ──────────────────────────────────────────────────── */
+.rightnow {
+  position: relative;
+  min-height: 100vh;
+  background: #0F0F11;
+  padding: clamp(6rem, 10vw, 12rem) clamp(2rem, 6vw, 8rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.rightnow-heading {
+  font-family: var(--font-bebas), 'Impact', sans-serif;
+  font-size: clamp(8rem, 16vw, 22rem);
+  line-height: 0.85;
+  color: #F3F4F6;
+  margin-bottom: 6rem;
+  overflow: hidden;
+}
+
+.rightnow-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0;
+  border-top: 1px solid #1F2937;
+}
+
+.rightnow-item {
+  padding: 2rem 0;
+  border-bottom: 1px solid #1F2937;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.5rem;
+  align-items: start;
+  opacity: 0; /* GSAP reveals */
+}
+
+.rightnow-dot {
+  width: 6px;
+  height: 6px;
+  background: #F97316;
+  border-radius: 50%;
+  margin-top: 0.4rem;
+  flex-shrink: 0;
+  transform: scale(0); /* GSAP reveals */
+}
+
+.rightnow-item-label {
+  font-family: var(--font-spacemono), monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #F97316;
+  margin-bottom: 0.4rem;
+}
+
+.rightnow-item-value {
+  font-family: var(--font-spacemono), monospace;
+  font-size: 0.875rem;
+  color: #F3F4F6;
+  opacity: 0.8;
+  line-height: 1.4;
+}
+
+/* ─── CONTACT ────────────────────────────────────────────────────── */
+.contact {
+  position: relative;
+  min-height: 100vh;
+  background: #0F0F11;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(4rem, 8vw, 10rem) clamp(2rem, 6vw, 8rem);
+  /* overflow visible — allows GSAP scatter chars to animate outside element bounds */
+  overflow: visible;
+}
+
+.contact-label {
+  font-family: var(--font-spacemono), monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #F97316;
+  margin-bottom: 3rem;
+}
+
+/* Massive email — magazine-style CTA */
+/* clamp scaled to fit 25-char address on one line across all viewports */
+.contact-email {
+  font-family: var(--font-bebas), 'Impact', sans-serif;
+  font-size: clamp(1rem, 5vw, 6rem);
+  line-height: 0.85;
+  color: #F3F4F6;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 4rem;
+  /* overflow visible — GSAP scatter chars need to escape the element bounds */
+  overflow: visible;
+}
+
+.contact-email:hover {
+  color: #F97316;
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem 3rem;
+  margin-top: 4rem;
+}
+
+.contact-link {
+  font-family: var(--font-spacemono), monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #F3F4F6;
+  text-decoration: none;
+  opacity: 0.4;
+  transition: opacity 0.2s;
+  border-bottom: 1px solid transparent;
+}
+
+.contact-link:hover {
+  opacity: 1;
+  border-bottom-color: #F97316;
+}
+
+.contact-footer {
+  position: absolute;
+  bottom: 3rem;
+  left: clamp(2rem, 6vw, 8rem);
+  right: clamp(2rem, 6vw, 8rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contact-footer-copy {
+  font-family: var(--font-spacemono), monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.15em;
+  color: #F3F4F6;
+  opacity: 0.2;
+}
+
+/* ─── WAVEFORM CANVAS ────────────────────────────────────────────── */
+.waveform-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+}
+
+/* ─── PROJECT PAGE ───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .project-story-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ─── REDUCED MOTION ─────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .grain-layer { animation: none; }
+  * { transition: none !important; }
+}
+
+/* ─── MOBILE OVERRIDES ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .cursor-main { display: none; }
+
+  html, a, button, [role="button"], input, textarea, select, label, summary { cursor: auto !important; }
+
+  .hero-name-line {
+    font-size: clamp(22vw, 26vw, 30vw);
+  }
+
+  .hero-signal-line {
+    display: none !important;
+    opacity: 0 !important;
+  }
+
+  .duality-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .duality-divider { display: none; }
+
+  .work-card-title {
+    font-size: clamp(20vw, 28vw, 36vw);
+    top: 50%;
+    left: 1.5rem;
+    bottom: auto;
+    transform: translateY(-50%);
+  }
+
+  .work-card-info {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+
+  .work-card-info > div:last-child {
+    text-align: left;
+  }
+
+  .work-card-number {
+    top: 1.5rem;
+    left: 1.5rem;
+  }
+
+  .work-card-desc {
+    font-size: 0.6875rem;
+    line-height: 1.5;
+  }
+
+  .manifesto-line {
+    font-size: clamp(10vw, 13vw, 16vw);
+  }
+
+  .manifesto-line:nth-child(2),
+  .manifesto-line:nth-child(3) {
+    padding-left: 0;
+  }
+
+  .contact-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .contact-footer {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+}
