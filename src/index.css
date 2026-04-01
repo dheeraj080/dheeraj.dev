@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@theme {
+  --color-neutral-100: var(--neutral-100);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-300: var(--neutral-300);
+  --color-neutral-400: var(--neutral-400);
+  --color-neutral-500: var(--neutral-500);
+  --color-neutral-600: var(--neutral-600);
+  --color-neutral-700: var(--neutral-700);
+  --color-neutral-800: var(--neutral-800);
+  
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+  --font-name: "Cormorant Garamond", ui-serif, Georgia, serif;
+}
+
+:root {
+  --neutral-100: #fbfaf5;
+  --neutral-200: #e8e8e3;
+  --neutral-300: #d5d6d0;
+  --neutral-400: #b8bab4;
+  --neutral-500: #9b9e97;
+  --neutral-600: #4f564d;
+  --neutral-700: #3d403c;
+  --neutral-800: #000b00;
+}
+
+.dark {
+  --neutral-100: #000b00;
+  --neutral-200: #121412;
+  --neutral-300: #1e211e;
+  --neutral-400: #3d403c;
+  --neutral-500: #4f564d;
+  --neutral-600: #9b9e97;
+  --neutral-700: #d5d6d0;
+  --neutral-800: #fbfaf5;
+}
+
+body {
+  background-color: var(--color-neutral-300);
+  color: var(--color-neutral-700);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  color: var(--color-neutral-800);
+  transition: color 0.3s ease;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

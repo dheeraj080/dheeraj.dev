@@ -1,0 +1,83 @@
+import { ArrowRight, ExternalLink } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+const featuredProjects = [
+  {
+    id: 'global-payment-gateway',
+    title: 'Payment Gateway',
+    description: 'Architected a highly available payment processing system handling 10k+ TPS with 99.99% uptime using Go, Kafka, and PostgreSQL.',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1600&auto=format&fit=crop',
+    liveLink: 'https://example.com/payment-gateway',
+  },
+  {
+    id: 'distributed-cache',
+    title: 'Distributed Cache',
+    description: 'Designed and implemented a custom distributed caching layer in Rust, reducing database load by 80% and improving p99 latency.',
+    image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1600&auto=format&fit=crop',
+    liveLink: 'https://example.com/distributed-cache',
+  },
+  {
+    id: 'microservices-migration',
+    title: 'K8s Migration',
+    description: 'Led the transition from a monolithic Node.js application to a Kubernetes-orchestrated Go microservices architecture, improving deployment velocity.',
+    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1600&auto=format&fit=crop',
+    liveLink: 'https://example.com/k8s-migration',
+  }
+];
+
+export default function FeaturedWork() {
+  return (
+    <section id="work" className="py-24 px-6">
+      <div className="container mx-auto max-w-9xl">
+        <div className="flex items-center gap-6 mb-16">
+          <span className="text-xs font-bold uppercase tracking-widest text-neutral-600 whitespace-nowrap">Featured Work</span>
+          <div className="h-px bg-neutral-400 flex-grow"></div>
+          <span className="text-xs font-bold uppercase tracking-widest text-neutral-600 whitespace-nowrap">Curated projects</span>
+        </div>
+
+        <div className="space-y-24">
+          {featuredProjects.map((project, index) => (
+            <div key={project.id} className="bg-gradient-to-b from-neutral-600 to-neutral-800 text-neutral-100 rounded-[2.5rem] p-4 md:p-6 shadow-xl">
+              <div className={`flex flex-col ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-8 lg:gap-16 min-h-[85vh]`}>
+                <div className="flex flex-col justify-between w-full lg:w-1/3 p-4 md:p-8">
+                  <div>
+                    <h2 className="text-5xl md:text-6xl mb-8 text-neutral-100">{project.title}</h2>
+                    <div className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-4">System Design</div>
+                    <p className="text-lg text-neutral-200 leading-relaxed">
+                      {project.description}
+                    </p>
+                  </div>
+                  
+                  <div className="mt-12 flex flex-wrap items-center gap-4">
+                    <Link to={`/work/${project.id}`} className="inline-flex items-center gap-4 px-6 py-3 rounded-[1.5rem] border border-neutral-400 hover:bg-neutral-100 hover:text-neutral-800 transition-colors group">
+                      <span className="font-medium uppercase tracking-wider text-sm">Read Case Study</span>
+                      <div className="w-8 h-8 rounded-[0.75rem] bg-neutral-500 group-hover:bg-neutral-200 flex items-center justify-center transition-colors">
+                        <ArrowRight size={16} />
+                      </div>
+                    </Link>
+                    {project.liveLink && (
+                      <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 px-6 py-3 rounded-[1.5rem] bg-neutral-100 text-neutral-800 hover:bg-neutral-300 transition-colors group">
+                        <span className="font-medium uppercase tracking-wider text-sm">Live Demo</span>
+                        <div className="w-8 h-8 rounded-[0.75rem] bg-neutral-300 group-hover:bg-neutral-400 flex items-center justify-center transition-colors">
+                          <ExternalLink size={16} />
+                        </div>
+                      </a>
+                    )}
+                  </div>
+                </div>
+                
+                <div className="w-full lg:w-2/3 rounded-[2rem] overflow-hidden relative aspect-[4/3] lg:aspect-auto">
+                  <img 
+                    src={project.image} 
+                    alt={project.title}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
