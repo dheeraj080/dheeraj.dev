@@ -1,6 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 const blogPosts = [
   {
@@ -30,20 +32,29 @@ const blogPosts = [
 ];
 
 export default function Blogs() {
+  const container = useRef<HTMLElement>(null);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  useGSAP(() => {
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    
+    tl.from('.blogs-title', { y: 50, opacity: 0, duration: 0.8, delay: 0.2 })
+      .from('.blog-post-card', { y: 30, opacity: 0, duration: 0.6, stagger: 0.15 }, '-=0.4');
+  }, { scope: container });
+
   return (
-    <main className="pt-32 pb-24 px-6 min-h-screen">
+    <main className="pt-32 pb-24 px-6 min-h-screen" ref={container}>
       <div className="container mx-auto max-w-4xl">
-        <h1 className="font-name text-6xl md:text-7xl lg:text-8xl tracking-tighter leading-none mb-12">
+        <h1 className="blogs-title font-name text-6xl md:text-7xl lg:text-8xl tracking-tighter leading-none mb-12">
           Engineering Blog
         </h1>
         
         <div className="space-y-12">
           {blogPosts.map((post) => (
-            <article key={post.id} className="group border-b border-neutral-400 pb-12">
+            <article key={post.id} className="blog-post-card group border-b border-neutral-400 pb-12">
               <div className="text-xs font-bold uppercase tracking-widest text-neutral-600 mb-4">{post.date}</div>
               <h2 className="text-3xl md:text-4xl mb-4 group-hover:text-neutral-500 transition-colors">
                 <Link to={`/blog/${post.id}`}>{post.title}</Link>

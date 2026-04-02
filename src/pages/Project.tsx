@@ -1,29 +1,42 @@
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, Github } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 export default function Project() {
   const { id } = useParams();
+  const container = useRef<HTMLElement>(null);
   
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
 
+  useGSAP(() => {
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    
+    tl.from('.project-back', { x: -20, opacity: 0, duration: 0.6, delay: 0.2 })
+      .from('.project-title', { y: 30, opacity: 0, duration: 0.8 }, '-=0.4')
+      .from('.project-image', { scale: 0.95, opacity: 0, duration: 0.8 }, '-=0.4')
+      .from('.project-sidebar > div', { x: -20, opacity: 0, duration: 0.6, stagger: 0.1 }, '-=0.4')
+      .from('.project-content section', { y: 30, opacity: 0, duration: 0.8, stagger: 0.15 }, '-=0.6');
+  }, { scope: container, dependencies: [id] });
+
   return (
-    <main className="pt-32 pb-24 px-6 min-h-screen">
+    <main className="pt-32 pb-24 px-6 min-h-screen" ref={container}>
       <div className="container mx-auto max-w-4xl">
-        <Link to="/" className="inline-flex items-center gap-2 text-neutral-600 hover:text-neutral-800 transition-colors mb-12 group">
+        <Link to="/" className="project-back inline-flex items-center gap-2 text-neutral-600 hover:text-neutral-800 transition-colors mb-12 group">
           <div className="w-8 h-8 rounded-[0.75rem] bg-neutral-200 group-hover:bg-neutral-400 flex items-center justify-center transition-colors">
             <ArrowLeft size={16} />
           </div>
           <span className="text-sm font-medium uppercase tracking-wider">Back to Home</span>
         </Link>
         
-        <h1 className="font-name text-6xl md:text-7xl lg:text-8xl tracking-tighter leading-none mb-8 capitalize">
+        <h1 className="project-title font-name text-6xl md:text-7xl lg:text-8xl tracking-tighter leading-none mb-8 capitalize">
           {id?.replace(/-/g, ' ')}
         </h1>
         
-        <div className="aspect-video w-full bg-neutral-400 rounded-[2.5rem] mb-12 overflow-hidden shadow-xl">
+        <div className="project-image aspect-video w-full bg-neutral-400 rounded-[2.5rem] mb-12 overflow-hidden shadow-xl">
           <img 
             src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1600&auto=format&fit=crop" 
             alt={id} 
@@ -32,7 +45,7 @@ export default function Project() {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
-          <div className="md:col-span-4 space-y-8">
+          <div className="project-sidebar md:col-span-4 space-y-8">
             <div>
               <div className="text-xs font-bold uppercase tracking-widest text-neutral-600 mb-4">Services</div>
               <ul className="space-y-2">
@@ -60,7 +73,7 @@ export default function Project() {
               </div>
             </div>
           </div>
-          <div className="md:col-span-8 space-y-12">
+          <div className="project-content md:col-span-8 space-y-12">
             <section>
               <h2 className="text-3xl mb-6">The What & Why</h2>
               <p className="text-lg text-neutral-700 leading-relaxed mb-6">

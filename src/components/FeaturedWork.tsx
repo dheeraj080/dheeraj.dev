@@ -1,5 +1,11 @@
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const featuredProjects = [
   {
@@ -26,8 +32,28 @@ const featuredProjects = [
 ];
 
 export default function FeaturedWork() {
+  const container = useRef<HTMLElement>(null);
+
+  useGSAP(() => {
+    const projects = gsap.utils.toArray('.featured-project');
+    
+    projects.forEach((project: any) => {
+      gsap.from(project, {
+        y: 100,
+        opacity: 0,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: project,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse'
+        }
+      });
+    });
+  }, { scope: container });
+
   return (
-    <section id="work" className="py-24 px-6">
+    <section id="work" className="py-24 px-6" ref={container}>
       <div className="container mx-auto max-w-9xl">
         <div className="flex items-center gap-6 mb-16">
           <span className="text-xs font-bold uppercase tracking-widest text-neutral-600 whitespace-nowrap">Featured Work</span>
@@ -37,8 +63,8 @@ export default function FeaturedWork() {
 
         <div className="space-y-24">
           {featuredProjects.map((project, index) => (
-            <div key={project.id} className="bg-gradient-to-b from-neutral-600 to-neutral-800 text-neutral-100 rounded-[2.5rem] p-4 md:p-6 shadow-xl">
-              <div className={`flex flex-col ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-8 lg:gap-16 min-h-[85vh]`}>
+            <div key={project.id} className="featured-project bg-gradient-to-b from-neutral-600 to-neutral-800 text-neutral-100 rounded-[2.5rem] p-4 md:p-6 shadow-xl">
+              <div className={`flex flex-col ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-8 lg:gap-16 min-h-fit lg:min-h-[85vh]`}>
                 <div className="flex flex-col justify-between w-full lg:w-1/3 p-4 md:p-8">
                   <div>
                     <h2 className="text-5xl md:text-6xl mb-8 text-neutral-100">{project.title}</h2>

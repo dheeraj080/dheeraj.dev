@@ -1,23 +1,43 @@
-import { useEffect } from 'react';
+import { useRef } from 'react';
 import { Mail, Github, Linkedin, Twitter } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Contact() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  const container = useRef<HTMLElement>(null);
+
+  useGSAP(() => {
+    const tl = gsap.timeline({ 
+      defaults: { ease: 'power3.out' },
+      scrollTrigger: {
+        trigger: container.current,
+        start: 'top 80%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+    
+    tl.from('.contact-title', { y: 50, opacity: 0, duration: 0.8 })
+      .from('.contact-desc', { y: 20, opacity: 0, duration: 0.6 }, '-=0.4')
+      .from('.contact-form-section', { x: -30, opacity: 0, duration: 0.8 }, '-=0.4')
+      .from('.contact-social-section', { x: 30, opacity: 0, duration: 0.8 }, '-=0.8')
+      .from('.contact-social-link', { y: 20, opacity: 0, duration: 0.4, stagger: 0.1 }, '-=0.4');
+  }, { scope: container });
 
   return (
-    <main className="pt-32 pb-24 px-6 min-h-screen">
+    <section id="contact" className="py-24 px-6" ref={container}>
       <div className="container mx-auto max-w-4xl">
-        <h1 className="font-name text-6xl md:text-7xl lg:text-8xl tracking-tighter leading-none mb-8">
+        <h1 className="contact-title font-name text-6xl md:text-7xl lg:text-8xl tracking-tighter leading-none mb-8">
           Let's Connect
         </h1>
-        <p className="text-xl text-neutral-700 max-w-2xl leading-relaxed mb-16">
+        <p className="contact-desc text-xl text-neutral-700 max-w-2xl leading-relaxed mb-16">
           Whether you're looking to scale your infrastructure, design a new distributed system, or just want to talk about the latest in backend engineering, I'd love to hear from you.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-          <div>
+          <div className="contact-form-section">
             <h2 className="text-3xl mb-8">Reach Out</h2>
             <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
               <div>
@@ -38,28 +58,28 @@ export default function Contact() {
             </form>
           </div>
 
-          <div>
+          <div className="contact-social-section">
             <h2 className="text-3xl mb-8">Socials & Links</h2>
             <div className="space-y-6">
-              <a href="#" className="flex items-center gap-4 text-neutral-700 hover:text-neutral-900 transition-colors group">
+              <a href="mailto:ryancooperblue@gmail.com" className="contact-social-link flex items-center gap-4 text-neutral-700 hover:text-neutral-900 transition-colors group">
                 <div className="w-12 h-12 rounded-[1rem] border border-neutral-400 flex items-center justify-center group-hover:bg-neutral-200 transition-colors">
                   <Mail size={20} />
                 </div>
-                <span className="text-lg font-medium">hello@dheerajkamble.dev</span>
+                <span className="text-lg font-medium">ryancooperblue@gmail.com</span>
               </a>
-              <a href="#" className="flex items-center gap-4 text-neutral-700 hover:text-neutral-900 transition-colors group">
+              <a href="https://github.com/dheerajkamble" target="_blank" rel="noopener noreferrer" className="contact-social-link flex items-center gap-4 text-neutral-700 hover:text-neutral-900 transition-colors group">
                 <div className="w-12 h-12 rounded-[1rem] border border-neutral-400 flex items-center justify-center group-hover:bg-neutral-200 transition-colors">
                   <Github size={20} />
                 </div>
                 <span className="text-lg font-medium">github.com/dheerajkamble</span>
               </a>
-              <a href="#" className="flex items-center gap-4 text-neutral-700 hover:text-neutral-900 transition-colors group">
+              <a href="https://linkedin.com/in/dheerajkamble" target="_blank" rel="noopener noreferrer" className="contact-social-link flex items-center gap-4 text-neutral-700 hover:text-neutral-900 transition-colors group">
                 <div className="w-12 h-12 rounded-[1rem] border border-neutral-400 flex items-center justify-center group-hover:bg-neutral-200 transition-colors">
                   <Linkedin size={20} />
                 </div>
                 <span className="text-lg font-medium">linkedin.com/in/dheerajkamble</span>
               </a>
-              <a href="#" className="flex items-center gap-4 text-neutral-700 hover:text-neutral-900 transition-colors group">
+              <a href="https://twitter.com/dheerajkamble" target="_blank" rel="noopener noreferrer" className="contact-social-link flex items-center gap-4 text-neutral-700 hover:text-neutral-900 transition-colors group">
                 <div className="w-12 h-12 rounded-[1rem] border border-neutral-400 flex items-center justify-center group-hover:bg-neutral-200 transition-colors">
                   <Twitter size={20} />
                 </div>
@@ -69,6 +89,6 @@ export default function Contact() {
           </div>
         </div>
       </div>
-    </main>
+    </section>
   );
 }

@@ -10,10 +10,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Project from './pages/Project';
 import BlogArticle from './pages/BlogArticle';
-import Work from './pages/Work';
-import About from './pages/About';
 import Blogs from './pages/Blogs';
-import Contact from './pages/Contact';
 
 export default function App() {
   const [isDark, setIsDark] = useState(false);
@@ -34,12 +31,9 @@ export default function App() {
         <Navbar toggleTheme={toggleTheme} isDark={isDark} />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/work" element={<Work />} />
           <Route path="/work/:id" element={<Project />} />
-          <Route path="/about" element={<About />} />
           <Route path="/blog" element={<Blogs />} />
           <Route path="/blog/:id" element={<BlogArticle />} />
-          <Route path="/contact" element={<Contact />} />
         </Routes>
         <Footer />
       </div>

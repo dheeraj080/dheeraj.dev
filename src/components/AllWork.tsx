@@ -1,6 +1,11 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useRef, useState, useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const allProjects = [
   { id: 'event-pipeline', title: 'Event Pipeline', tags: ['Kafka', 'Go', 'System Design'], image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop' },
@@ -12,8 +17,36 @@ const allProjects = [
 
 export default function AllWork() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [thumbWidth, setThumbWidth] = useState(20);
+
+  useGSAP(() => {
+    gsap.from('.all-work-header', {
+      y: 50,
+      opacity: 0,
+      duration: 0.8,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: 'top 80%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+
+    gsap.from('.all-work-item', {
+      y: 50,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: scrollContainerRef.current,
+        start: 'top 85%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+  }, { scope: sectionRef });
 
   const handleScroll = () => {
     if (scrollContainerRef.current) {
@@ -34,8 +67,8 @@ export default function AllWork() {
   }, []);
 
   return (
-    <section className="py-24 overflow-hidden relative">
-      <div className="container mx-auto px-6 max-w-6xl mb-12">
+    <section className="py-24 overflow-hidden relative" ref={sectionRef}>
+      <div className="all-work-header container mx-auto px-6 max-w-6xl mb-12">
         <div className="flex items-center gap-4">
           <h2 className="text-4xl m-0">All work</h2>
           <span className="text-xs font-bold uppercase tracking-widest text-neutral-600">{allProjects.length}</span>
@@ -51,7 +84,7 @@ export default function AllWork() {
         <div className="w-[10vw] shrink-0 lg:w-[calc((100vw-72rem)/2)]"></div>
         
         {allProjects.map((project) => (
-          <div key={project.id} className="shrink-0 w-[320px] md:w-[400px] snap-center group">
+          <div key={project.id} className="all-work-item shrink-0 w-[320px] md:w-[400px] snap-center group">
             <Link to={`/work/${project.id}`} className="block relative aspect-[3/4.2] rounded-[2rem] overflow-hidden bg-neutral-600 mb-6 shadow-lg">
               <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
