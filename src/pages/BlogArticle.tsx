@@ -31,25 +31,25 @@ export default function BlogArticle() {
           <span className="text-sm font-medium uppercase tracking-wider">Back to Home</span>
         </Link>
         
-        <div className="article-date text-xs font-bold uppercase tracking-widest text-neutral-600 mb-6">Oct 12, 2025</div>
+        <div className="article-date text-xs font-bold uppercase tracking-widest text-neutral-600 mb-6">Mar 2026</div>
         <h1 className="article-title font-name text-5xl md:text-6xl tracking-tighter leading-tight mb-12 capitalize">
           {id?.replace(/-/g, ' ')}
         </h1>
         
         <div className="article-content prose prose-lg prose-neutral max-w-none">
           <p className="text-xl text-neutral-700 leading-relaxed mb-8">
-            When our user base doubled over a single weekend, our existing RabbitMQ setup began to show its limits. Message queues backed up, and our worker nodes couldn't keep pace with the ingestion rate.
+            Most tutorials show you how to generate a JWT and validate its signature. They rarely show you how to handle token revocation, algorithm confusion attacks, or how to structure your security filter chain in a microservices environment.
           </p>
           <p className="text-lg text-neutral-700 leading-relaxed mb-6">
-            This is the story of how we migrated to Apache Kafka, redesigned our consumer groups, and implemented a robust dead-letter queue strategy to handle massive scale without dropping a single event.
+            In this post, I walk through the exact Spring Security 6 configuration I use for API gateways, including stateless validation, Redis-backed blacklisting, and role-based access control.
           </p>
-          <h2 className="text-3xl mt-12 mb-6">1. Identifying the Bottleneck</h2>
+          <h2 className="text-3xl mt-12 mb-6">1. The Stateless Gateway Pattern</h2>
           <p className="text-lg text-neutral-700 leading-relaxed mb-6">
-            Before writing any code, we needed to understand exactly where the system was failing. By instrumenting our message brokers with Prometheus and Grafana, we discovered that disk I/O on the RabbitMQ nodes was maxing out during peak traffic hours.
+            When building a microservices architecture, the API gateway should be the only component that knows how to validate a JWT signature. Downstream services should trust the gateway and rely on propagated headers.
           </p>
-          <h2 className="text-3xl mt-12 mb-6">2. The Migration Strategy</h2>
+          <h2 className="text-3xl mt-12 mb-6">2. Token Revocation with Redis</h2>
           <p className="text-lg text-neutral-700 leading-relaxed mb-6">
-            We couldn't afford downtime. We implemented a dual-write strategy where the API gateway published events to both RabbitMQ and Kafka simultaneously. Once we verified the Kafka consumers were processing events correctly, we slowly drained the old queues.
+            JWTs are stateless, which means you can't invalidate them simply by deleting a session. We use Redis to store a blacklist of revoked token IDs (JTI claim) with a TTL matching the token's expiration time.
           </p>
         </div>
       </div>

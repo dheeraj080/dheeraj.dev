@@ -1,4 +1,4 @@
-import { ArrowRight, ExternalLink } from 'lucide-react';
+import { ArrowRight, Github } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useRef } from 'react';
 import gsap from 'gsap';
@@ -9,25 +9,28 @@ gsap.registerPlugin(ScrollTrigger);
 
 const featuredProjects = [
   {
-    id: 'global-payment-gateway',
-    title: 'Payment Gateway',
-    description: 'Architected a highly available payment processing system handling 10k+ TPS with 99.99% uptime using Go, Kafka, and PostgreSQL.',
+    id: 'ai-finance-tracker',
+    title: 'AI Finance Tracker',
+    description: 'A microservices-based personal finance platform with an API gateway (Spring Cloud Gateway), Eureka service registry, Kafka event streaming between services, per-service PostgreSQL databases, Redis caching, and centralized JWT authentication. Built with Java 25 and Spring Boot 4.',
+    image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=1600&auto=format&fit=crop',
+    githubLink: 'https://github.com/dheeraj080',
+    liveLink: null,
+  },
+  {
+    id: 'stock-data-platform',
+    title: 'Stock Data Platform',
+    description: 'A real-time market data platform with multi-provider ingestion (Alpha Vantage, Polygon.io, Binance, CoinGecko), Kafka-based processing pipelines, TimescaleDB for time-series storage, and Redis for live quote caching. Designed for high-throughput financial data workloads.',
+    image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1600&auto=format&fit=crop',
+    githubLink: 'https://github.com/dheeraj080',
+    liveLink: null,
+  },
+  {
+    id: 'jwt-auth-service',
+    title: 'JWT Auth Service',
+    description: 'A production-hardened Spring Security 6 authentication service with stateless JWT validation at the API gateway, role-based access control, token blacklisting via Redis, and protection against common vulnerabilities including algorithm confusion and token replay attacks.',
     image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1600&auto=format&fit=crop',
-    liveLink: 'https://example.com/payment-gateway',
-  },
-  {
-    id: 'distributed-cache',
-    title: 'Distributed Cache',
-    description: 'Designed and implemented a custom distributed caching layer in Rust, reducing database load by 80% and improving p99 latency.',
-    image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1600&auto=format&fit=crop',
-    liveLink: 'https://example.com/distributed-cache',
-  },
-  {
-    id: 'microservices-migration',
-    title: 'K8s Migration',
-    description: 'Led the transition from a monolithic Node.js application to a Kubernetes-orchestrated Go microservices architecture, improving deployment velocity.',
-    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1600&auto=format&fit=crop',
-    liveLink: 'https://example.com/k8s-migration',
+    githubLink: 'https://github.com/dheeraj080',
+    liveLink: null,
   }
 ];
 
@@ -81,11 +84,11 @@ export default function FeaturedWork() {
                         <ArrowRight size={16} />
                       </div>
                     </Link>
-                    {project.liveLink && (
-                      <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 px-6 py-3 rounded-[1.5rem] bg-neutral-100 text-neutral-800 hover:bg-neutral-300 transition-colors group">
-                        <span className="font-medium uppercase tracking-wider text-sm">Live Demo</span>
+                    {project.githubLink && (
+                      <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 px-6 py-3 rounded-[1.5rem] bg-neutral-100 text-neutral-800 hover:bg-neutral-300 transition-colors group">
+                        <span className="font-medium uppercase tracking-wider text-sm">GitHub</span>
                         <div className="w-8 h-8 rounded-[0.75rem] bg-neutral-300 group-hover:bg-neutral-400 flex items-center justify-center transition-colors">
-                          <ExternalLink size={16} />
+                          <Github size={16} />
                         </div>
                       </a>
                     )}

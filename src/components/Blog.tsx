@@ -65,21 +65,21 @@ export default function Blog() {
               <div className="blog-header text-xs font-bold uppercase tracking-widest text-neutral-600 mb-4">In my drafts</div>
               <ul className="blog-draft-list space-y-4 border-y border-neutral-400 py-6 mb-6">
                 <li className="blog-draft-item">
-                  <Link to="/blog/idempotency-in-distributed-systems" className="flex items-center gap-4 text-neutral-600 hover:text-neutral-800 cursor-pointer transition-colors">
+                  <Link to="/blog/kafka-microservices-patterns" className="flex items-center gap-4 text-neutral-600 hover:text-neutral-800 cursor-pointer transition-colors">
                     <FileText size={16} />
-                    <span className="text-sm font-medium">Idempotency in distributed systems</span>
+                    <span className="text-sm font-medium">Kafka patterns I use across my microservices</span>
                   </Link>
                 </li>
                 <li className="blog-draft-item">
-                  <Link to="/blog/optimizing-postgres-query-performance" className="flex items-center gap-4 text-neutral-600 hover:text-neutral-800 cursor-pointer transition-colors">
+                  <Link to="/blog/database-per-service-postgresql" className="flex items-center gap-4 text-neutral-600 hover:text-neutral-800 cursor-pointer transition-colors">
                     <FileText size={16} />
-                    <span className="text-sm font-medium">Optimizing Postgres query performance</span>
+                    <span className="text-sm font-medium">Database-per-service with PostgreSQL in practice</span>
                   </Link>
                 </li>
                 <li className="blog-draft-item">
-                  <Link to="/blog/grpc-vs-rest-a-benchmark" className="flex items-center gap-4 text-neutral-600 hover:text-neutral-800 cursor-pointer transition-colors">
+                  <Link to="/blog/timescaledb-financial-data" className="flex items-center gap-4 text-neutral-600 hover:text-neutral-800 cursor-pointer transition-colors">
                     <FileText size={16} />
-                    <span className="text-sm font-medium">gRPC vs REST: A Benchmark</span>
+                    <span className="text-sm font-medium">Why I chose TimescaleDB for real-time market data</span>
                   </Link>
                 </li>
               </ul>
@@ -94,15 +94,15 @@ export default function Blog() {
           <div className="lg:col-span-8">
             <div className="blog-featured flex flex-col gap-6">
               <div>
-                <h3 className="text-3xl mb-2">Scaling our event-driven architecture to 1 million events per minute</h3>
-                <div className="text-xs font-bold uppercase tracking-widest text-neutral-600">Oct 12, 2025</div>
+                <h3 className="text-3xl mb-2">Building production-ready JWT security in Spring Boot</h3>
+                <div className="text-xs font-bold uppercase tracking-widest text-neutral-600">Mar 2026</div>
               </div>
               <div className="text-lg text-neutral-700 leading-relaxed max-w-2xl space-y-4">
-                <p>When our user base doubled over a single weekend, our existing RabbitMQ setup began to show its limits. Message queues backed up, and our worker nodes couldn't keep pace with the ingestion rate.</p>
-                <p>This is the story of how we migrated to Apache Kafka, redesigned our consumer groups, and implemented a robust dead-letter queue strategy to handle massive scale without dropping a single event.</p>
+                <p>Most tutorials show you how to generate a JWT and validate its signature. They rarely show you how to handle token revocation, algorithm confusion attacks, or how to structure your security filter chain in a microservices environment.</p>
+                <p>In this post, I walk through the exact Spring Security 6 configuration I use for API gateways, including stateless validation, Redis-backed blacklisting, and role-based access control.</p>
               </div>
               <div className="pt-4">
-                <Link to="/blog/scaling-event-driven-architecture" className="inline-flex items-center gap-4 px-6 py-3 rounded-[1.5rem] border border-neutral-400 hover:bg-neutral-100 hover:border-neutral-600 transition-colors group">
+                <Link to="/blog/building-jwt-security-spring-boot" className="inline-flex items-center gap-4 px-6 py-3 rounded-[1.5rem] border border-neutral-400 hover:bg-neutral-100 hover:border-neutral-600 transition-colors group">
                   <span className="font-medium uppercase tracking-wider text-sm text-neutral-700">Keep Reading</span>
                   <div className="w-8 h-8 rounded-[0.75rem] bg-neutral-200 group-hover:bg-neutral-300 flex items-center justify-center transition-colors">
                     <ArrowRight size={16} />

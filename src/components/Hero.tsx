@@ -28,7 +28,7 @@ export default function Hero() {
             </h1>
             <div className="max-w-2xl">
               <p className="hero-desc text-2xl md:text-3xl text-neutral-700 mb-8 leading-relaxed">
-                I specialize in designing scalable backend systems, distributed architectures, and high-performance APIs that power modern applications.
+                I build backend systems using Java and Spring Boot — REST APIs, microservices, event-driven architectures with Kafka, and JWT-secured distributed services.
               </p>
             </div>
           </div>
@@ -81,13 +81,13 @@ export default function Hero() {
             <div className="mt-12">
               <div className="hero-social-header text-xs font-bold uppercase tracking-widest text-neutral-600 mb-6">Connect with me</div>
               <div className="flex gap-4">
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hero-social w-12 h-12 rounded-full bg-neutral-800 text-neutral-100 flex items-center justify-center hover:bg-neutral-700 transition-colors" aria-label="GitHub">
+                <a href="https://github.com/dheeraj080" target="_blank" rel="noopener noreferrer" className="hero-social w-12 h-12 rounded-full bg-neutral-800 text-neutral-100 flex items-center justify-center hover:bg-neutral-700 transition-colors" aria-label="GitHub">
                   <Github size={20} />
                 </a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hero-social w-12 h-12 rounded-full bg-neutral-800 text-neutral-100 flex items-center justify-center hover:bg-neutral-700 transition-colors" aria-label="LinkedIn">
+                <a href="https://linkedin.com/in/dheerajkamble" target="_blank" rel="noopener noreferrer" className="hero-social w-12 h-12 rounded-full bg-neutral-800 text-neutral-100 flex items-center justify-center hover:bg-neutral-700 transition-colors" aria-label="LinkedIn">
                   <Linkedin size={20} />
                 </a>
-                <a href="mailto:ryancooperblue@gmail.com" className="hero-social w-12 h-12 rounded-full bg-neutral-800 text-neutral-100 flex items-center justify-center hover:bg-neutral-700 transition-colors" aria-label="Email">
+                <a href="mailto:kambledheerajkumar@gmail.com" className="hero-social w-12 h-12 rounded-full bg-neutral-800 text-neutral-100 flex items-center justify-center hover:bg-neutral-700 transition-colors" aria-label="Email">
                   <Mail size={20} />
                 </a>
               </div>

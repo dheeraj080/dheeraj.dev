@@ -6,28 +6,28 @@ import { useGSAP } from '@gsap/react';
 
 const blogPosts = [
   {
-    id: 'scaling-event-driven-architecture',
-    title: 'Scaling our event-driven architecture to 1 million events per minute',
-    date: 'Oct 12, 2025',
-    excerpt: 'When our user base doubled over a single weekend, our existing RabbitMQ setup began to show its limits. This is the story of how we migrated to Apache Kafka.',
+    id: 'building-jwt-security-spring-boot',
+    title: 'Building production-ready JWT security in Spring Boot',
+    date: 'Mar 2026',
+    excerpt: 'A walkthrough of Spring Security 6 configuration for a microservices gateway — stateless JWT validation, role-based access, Redis token blacklisting, and the vulnerabilities most tutorials skip.',
   },
   {
-    id: 'idempotency-in-distributed-systems',
-    title: 'Idempotency in distributed systems',
-    date: 'Sep 05, 2025',
-    excerpt: 'Why idempotency is crucial for reliable APIs and how to implement it effectively using caching layers and database constraints.',
+    id: 'kafka-microservices-patterns',
+    title: 'Kafka patterns I use across my microservices',
+    date: 'Feb 2026',
+    excerpt: 'How I structure producers, consumers, and dead-letter topics across services — and why I stopped using @KafkaListener the naive way.',
   },
   {
-    id: 'optimizing-postgres-query-performance',
-    title: 'Optimizing Postgres query performance',
-    date: 'Jul 22, 2025',
-    excerpt: 'A deep dive into EXPLAIN ANALYZE, index types, and how we reduced our p99 latency by 60% with a few schema tweaks.',
+    id: 'database-per-service-postgresql',
+    title: 'Database-per-service with PostgreSQL in practice',
+    date: 'Jan 2026',
+    excerpt: 'The tradeoffs nobody talks about when you give every microservice its own PostgreSQL instance — schema management, cross-service queries, and keeping data consistent without distributed transactions.',
   },
   {
-    id: 'grpc-vs-rest-a-benchmark',
-    title: 'gRPC vs REST: A Benchmark',
-    date: 'May 14, 2025',
-    excerpt: 'Comparing the performance, payload size, and developer experience of gRPC and REST in a microservices environment.',
+    id: 'timescaledb-financial-data',
+    title: 'Why I chose TimescaleDB for real-time market data',
+    date: 'Dec 2025',
+    excerpt: 'Comparing PostgreSQL, InfluxDB, and TimescaleDB for storing tick-level stock and crypto data — and the hypertable design that made queries fast.',
   }
 ];
 

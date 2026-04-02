@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { Mail, Github, Linkedin, Twitter } from 'lucide-react';
+import { Mail, Github, Linkedin } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -61,29 +61,23 @@ export default function Contact() {
           <div className="contact-social-section">
             <h2 className="text-3xl mb-8">Socials & Links</h2>
             <div className="space-y-6">
-              <a href="mailto:ryancooperblue@gmail.com" className="contact-social-link flex items-center gap-4 text-neutral-700 hover:text-neutral-900 transition-colors group">
+              <a href="mailto:kambledheerajkumar@gmail.com" className="contact-social-link flex items-center gap-4 text-neutral-700 hover:text-neutral-900 transition-colors group">
                 <div className="w-12 h-12 rounded-[1rem] border border-neutral-400 flex items-center justify-center group-hover:bg-neutral-200 transition-colors">
                   <Mail size={20} />
                 </div>
-                <span className="text-lg font-medium">ryancooperblue@gmail.com</span>
+                <span className="text-lg font-medium">kambledheerajkumar@gmail.com</span>
               </a>
-              <a href="https://github.com/dheerajkamble" target="_blank" rel="noopener noreferrer" className="contact-social-link flex items-center gap-4 text-neutral-700 hover:text-neutral-900 transition-colors group">
+              <a href="https://github.com/dheeraj080" target="_blank" rel="noopener noreferrer" className="contact-social-link flex items-center gap-4 text-neutral-700 hover:text-neutral-900 transition-colors group">
                 <div className="w-12 h-12 rounded-[1rem] border border-neutral-400 flex items-center justify-center group-hover:bg-neutral-200 transition-colors">
                   <Github size={20} />
                 </div>
-                <span className="text-lg font-medium">github.com/dheerajkamble</span>
+                <span className="text-lg font-medium">github.com/dheeraj080</span>
               </a>
-              <a href="https://linkedin.com/in/dheerajkamble" target="_blank" rel="noopener noreferrer" className="contact-social-link flex items-center gap-4 text-neutral-700 hover:text-neutral-900 transition-colors group">
+              <a href="https://linkedin.com/in/[YOUR LINKEDIN HANDLE]" target="_blank" rel="noopener noreferrer" className="contact-social-link flex items-center gap-4 text-neutral-700 hover:text-neutral-900 transition-colors group">
                 <div className="w-12 h-12 rounded-[1rem] border border-neutral-400 flex items-center justify-center group-hover:bg-neutral-200 transition-colors">
                   <Linkedin size={20} />
                 </div>
-                <span className="text-lg font-medium">linkedin.com/in/dheerajkamble</span>
-              </a>
-              <a href="https://twitter.com/dheerajkamble" target="_blank" rel="noopener noreferrer" className="contact-social-link flex items-center gap-4 text-neutral-700 hover:text-neutral-900 transition-colors group">
-                <div className="w-12 h-12 rounded-[1rem] border border-neutral-400 flex items-center justify-center group-hover:bg-neutral-200 transition-colors">
-                  <Twitter size={20} />
-                </div>
-                <span className="text-lg font-medium">@dheerajkamble</span>
+                <span className="text-lg font-medium">linkedin.com/in/[YOUR LINKEDIN HANDLE]</span>
               </a>
             </div>
           </div>

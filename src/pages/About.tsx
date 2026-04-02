@@ -45,13 +45,13 @@ export default function About() {
 
         <div className="about-text prose prose-lg prose-neutral max-w-none">
           <p className="text-2xl text-neutral-800 leading-relaxed mb-8 font-medium">
-            I'm a Senior Backend Engineer passionate about designing fault-tolerant, highly available distributed systems.
+            I'm a backend engineer who builds production-grade systems in Java and Spring Boot. My focus is microservices architecture, event-driven design with Kafka, and building APIs that are secure, reliable, and easy to operate.
           </p>
           <p className="text-lg text-neutral-700 leading-relaxed mb-6">
-            Over the past decade, I've transitioned from building simple monolithic CRUD applications to orchestrating complex microservices architectures that handle millions of requests per minute. My philosophy is simple: build systems that are boring to operate but exciting to scale.
+            I've built an AI-powered personal finance tracker as a full microservices system — API gateway, Eureka service registry, Kafka-based event streaming, per-service PostgreSQL databases, Redis caching, and centralized JWT authentication. I'm currently building a real-time stock and crypto data platform with multi-provider ingestion, Kafka pipelines, and TimescaleDB.
           </p>
           <p className="text-lg text-neutral-700 leading-relaxed mb-12">
-            When I'm not optimizing PostgreSQL queries or debugging Kubernetes pods, I'm usually writing about system design patterns or contributing to open-source infrastructure tools.
+            When I'm not building, I'm reading about system design, distributed systems patterns, and how large-scale financial data platforms are architected.
           </p>
 
           <h2 className="about-competencies-title text-3xl mb-8">Core Competencies</h2>
@@ -59,22 +59,22 @@ export default function About() {
             <div className="about-competency bg-neutral-200 p-6 rounded-[1.5rem]">
               <Server className="w-8 h-8 text-neutral-600 mb-4" />
               <h3 className="text-xl font-bold mb-2">Backend Development</h3>
-              <p className="text-neutral-700">Go, Rust, Python, Node.js. Building robust APIs (REST, gRPC, GraphQL) with a focus on performance and type safety.</p>
+              <p className="text-neutral-700">Java, Spring Boot, REST APIs, Spring Security. Building robust, well-tested APIs with a focus on reliability and correctness.</p>
             </div>
             <div className="about-competency bg-neutral-200 p-6 rounded-[1.5rem]">
               <Database className="w-8 h-8 text-neutral-600 mb-4" />
-              <h3 className="text-xl font-bold mb-2">Data Engineering</h3>
-              <p className="text-neutral-700">PostgreSQL, Redis, Kafka, Elasticsearch. Designing schemas, optimizing queries, and building real-time event pipelines.</p>
+              <h3 className="text-xl font-bold mb-2">Event-Driven Systems</h3>
+              <p className="text-neutral-700">Apache Kafka, Spring Kafka. Designing asynchronous microservices pipelines, consumer groups, and reliable event processing.</p>
             </div>
             <div className="about-competency bg-neutral-200 p-6 rounded-[1.5rem]">
               <Cloud className="w-8 h-8 text-neutral-600 mb-4" />
-              <h3 className="text-xl font-bold mb-2">Infrastructure & Cloud</h3>
-              <p className="text-neutral-700">AWS, Kubernetes, Docker, Terraform. Implementing CI/CD pipelines and infrastructure as code for reliable deployments.</p>
+              <h3 className="text-xl font-bold mb-2">Data & Storage</h3>
+              <p className="text-neutral-700">PostgreSQL, Redis, TimescaleDB. Database-per-service patterns, schema design, caching strategies, and time-series data storage.</p>
             </div>
             <div className="about-competency bg-neutral-200 p-6 rounded-[1.5rem]">
               <Lock className="w-8 h-8 text-neutral-600 mb-4" />
-              <h3 className="text-xl font-bold mb-2">System Architecture</h3>
-              <p className="text-neutral-700">Microservices, Domain-Driven Design, Event Sourcing, and designing for high availability and fault tolerance.</p>
+              <h3 className="text-xl font-bold mb-2">Architecture</h3>
+              <p className="text-neutral-700">Microservices, Spring Cloud Gateway, Eureka, JWT auth. Building distributed systems that are fault-tolerant and straightforward to operate.</p>
             </div>
           </div>
 
@@ -85,7 +85,7 @@ export default function About() {
             </div>
             <div className="bg-neutral-200 p-8 rounded-[2rem] overflow-x-auto custom-scrollbar">
               <GitHubCalendar 
-                username="dheerajkamble" 
+                username="dheeraj080" 
                 colorScheme="light"
                 theme={{
                   light: ['#e8e8e3', '#b8bab4', '#9b9e97', '#4f564d', '#3d403c'],

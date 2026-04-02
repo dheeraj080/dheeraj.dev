@@ -1,4 +1,4 @@
-import { Twitter, Linkedin } from 'lucide-react';
+import { Linkedin, Github } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Footer() {
@@ -18,10 +18,10 @@ export default function Footer() {
           </div>
           
           <div className="flex items-center gap-4">
-            <a href="https://twitter.com/dheerajkamble" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-[1.5rem] border border-neutral-400 flex items-center justify-center text-neutral-600 hover:bg-neutral-400 hover:text-neutral-800 transition-colors" aria-label="Twitter">
-              <Twitter size={18} />
+            <a href="https://github.com/dheeraj080" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-[1.5rem] border border-neutral-400 flex items-center justify-center text-neutral-600 hover:bg-neutral-400 hover:text-neutral-800 transition-colors" aria-label="GitHub">
+              <Github size={18} />
             </a>
-            <a href="https://linkedin.com/in/dheerajkamble" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-[1.5rem] border border-neutral-400 flex items-center justify-center text-neutral-600 hover:bg-neutral-400 hover:text-neutral-800 transition-colors" aria-label="LinkedIn">
+            <a href="https://linkedin.com/in/[YOUR LINKEDIN HANDLE]" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-[1.5rem] border border-neutral-400 flex items-center justify-center text-neutral-600 hover:bg-neutral-400 hover:text-neutral-800 transition-colors" aria-label="LinkedIn">
               <Linkedin size={18} />
             </a>
           </div>

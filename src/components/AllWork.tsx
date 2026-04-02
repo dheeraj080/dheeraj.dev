@@ -1,4 +1,4 @@
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
@@ -8,11 +8,11 @@ import { useGSAP } from '@gsap/react';
 gsap.registerPlugin(ScrollTrigger);
 
 const allProjects = [
-  { id: 'event-pipeline', title: 'Event Pipeline', tags: ['Kafka', 'Go', 'System Design'], image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop' },
-  { id: 'auth-service', title: 'Auth Service', tags: ['Rust', 'Redis', 'Security'], image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=600&auto=format&fit=crop' },
-  { id: 'graphql-gateway', title: 'GraphQL API', tags: ['Node.js', 'Apollo', 'Architecture'], image: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=80&w=600&auto=format&fit=crop' },
-  { id: 'data-warehouse', title: 'Data Warehouse', tags: ['Python', 'Snowflake', 'Airflow'], image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop' },
-  { id: 'ci-cd-pipeline', title: 'CI/CD Pipeline', tags: ['GitHub Actions', 'Docker', 'AWS'], image: 'https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?q=80&w=600&auto=format&fit=crop' },
+  { id: 'api-gateway', title: 'API Gateway', tags: ['Spring Cloud', 'JWT', 'Spring Boot'], image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=600&auto=format&fit=crop' },
+  { id: 'kafka-pipeline', title: 'Kafka Pipeline', tags: ['Kafka', 'Java', 'Event-Driven'], image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop' },
+  { id: 'notification-service', title: 'Notification Service', tags: ['Spring Boot', 'Kafka', 'Microservices'], image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=600&auto=format&fit=crop' },
+  { id: 'timescale-ingestor', title: 'TimescaleDB Ingestor', tags: ['TimescaleDB', 'PostgreSQL', 'Java'], image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop' },
+  { id: 'redis-cache-layer', title: 'Redis Cache Layer', tags: ['Redis', 'Spring Boot', 'Performance'], image: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=80&w=600&auto=format&fit=crop' },
 ];
 
 export default function AllWork() {
@@ -57,6 +57,17 @@ export default function AllWork() {
       
       const widthPercentage = Math.max((clientWidth / scrollWidth) * 100, 10);
       setThumbWidth(widthPercentage);
+    }
+  };
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollContainerRef.current) {
+      const { clientWidth } = scrollContainerRef.current;
+      const scrollAmount = clientWidth * 0.8;
+      scrollContainerRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
     }
   };
 
@@ -111,14 +122,34 @@ export default function AllWork() {
       </div>
 
       {/* Custom Scrollbar Component */}
-      <div className="absolute bottom-16 left-1/2 -translate-x-1/2 w-[50vw] h-[2px] bg-neutral-200 rounded-full overflow-hidden">
-        <div 
-          className="h-full bg-neutral-600 rounded-full"
-          style={{ 
-            width: `${thumbWidth}%`,
-            transform: `translateX(${scrollProgress * ((100 - thumbWidth) / thumbWidth * 100)}%)`
-          }}
-        />
+      <div className="container mx-auto px-6 max-w-6xl mt-4 flex items-center justify-center gap-6">
+        <button 
+          onClick={() => scroll('left')}
+          className="w-10 h-10 rounded-full border border-neutral-400 flex items-center justify-center text-neutral-600 hover:bg-neutral-200 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+          disabled={scrollProgress <= 0.01}
+          aria-label="Scroll left"
+        >
+          <ArrowLeft size={16} />
+        </button>
+        
+        <div className="w-48 h-[2px] bg-neutral-300 rounded-full overflow-hidden relative">
+          <div 
+            className="absolute top-0 left-0 h-full bg-neutral-600 rounded-full"
+            style={{ 
+              width: `${thumbWidth}%`,
+              transform: `translateX(${scrollProgress * ((100 - thumbWidth) / thumbWidth * 100)}%)`
+            }}
+          />
+        </div>
+
+        <button 
+          onClick={() => scroll('right')}
+          className="w-10 h-10 rounded-full border border-neutral-400 flex items-center justify-center text-neutral-600 hover:bg-neutral-200 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+          disabled={scrollProgress >= 0.99}
+          aria-label="Scroll right"
+        >
+          <ArrowRight size={16} />
+        </button>
       </div>
     </section>
   );
