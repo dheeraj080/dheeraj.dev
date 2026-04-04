@@ -88,8 +88,8 @@ export default function About() {
                 username="dheeraj080" 
                 colorScheme="light"
                 theme={{
-                  light: ['#e8e8e3', '#b8bab4', '#9b9e97', '#4f564d', '#3d403c'],
-                  dark: ['#121412', '#3d403c', '#4f564d', '#9b9e97', '#d5d6d0'],
+                  light: ['#FFFAF0', '#8BA194', '#7C927E', '#6D8269', '#4F633D'],
+                  dark: ['#0D0E0A', '#45362C', '#5E4E40', '#776753', '#A8977A'],
                 }}
               />
             </div>

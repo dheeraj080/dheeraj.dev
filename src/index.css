@@ -16,25 +16,25 @@
 }
 
 :root {
-  --neutral-100: #fbfaf5;
-  --neutral-200: #e8e8e3;
-  --neutral-300: #d5d6d0;
-  --neutral-400: #b8bab4;
-  --neutral-500: #9b9e97;
-  --neutral-600: #4f564d;
-  --neutral-700: #3d403c;
-  --neutral-800: #000b00;
+  --neutral-100: #FFFFFF;
+  --neutral-200: #FFFAF0;
+  --neutral-300: #FFF7E2;
+  --neutral-400: #8BA194;
+  --neutral-500: #7C927E;
+  --neutral-600: #6D8269;
+  --neutral-700: #5E7353;
+  --neutral-800: #4F633D;
 }
 
 .dark {
-  --neutral-100: #000b00;
-  --neutral-200: #121412;
-  --neutral-300: #1e211e;
-  --neutral-400: #3d403c;
-  --neutral-500: #4f564d;
-  --neutral-600: #9b9e97;
-  --neutral-700: #d5d6d0;
-  --neutral-800: #fbfaf5;
+  --neutral-100: #000000;
+  --neutral-200: #0D0E0A;
+  --neutral-300: #161711;
+  --neutral-400: #45362C;
+  --neutral-500: #5E4E40;
+  --neutral-600: #776753;
+  --neutral-700: #8F7F67;
+  --neutral-800: #A8977A;
 }
 
 body {
