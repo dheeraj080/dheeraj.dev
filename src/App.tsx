@@ -13,7 +13,7 @@ import BlogArticle from './pages/BlogArticle';
 import Blogs from './pages/Blogs';
 
 export default function App() {
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(true);
 
   useEffect(() => {
     if (isDark) {
