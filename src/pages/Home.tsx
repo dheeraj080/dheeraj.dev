@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import Hero from '../components/Hero';
+import Marquee from '../components/Marquee';
 import FeaturedWork from '../components/FeaturedWork';
 import AllWork from '../components/AllWork';
 import Blog from '../components/Blog';
@@ -30,10 +31,11 @@ export default function Home() {
   return (
     <main>
       <Hero />
+      <Marquee />
       <FeaturedWork />
       <AllWork />
-      <About />
       <Blog />
+      <About />
       <Contact />
     </main>
   );

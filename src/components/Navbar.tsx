@@ -1,127 +1,108 @@
-import { useState } from 'react';
-import { Home, Moon, Sun, Menu, X } from 'lucide-react';
-import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'motion/react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import gsap from 'gsap';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
-
-gsap.registerPlugin(ScrollToPlugin);
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Navbar({ toggleTheme, isDark }: { toggleTheme: () => void, isDark: boolean }) {
-  const { scrollY } = useScroll();
-  const [hidden, setHidden] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const navigate = useNavigate();
-  const location = useLocation();
+  const [scrolled, setScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const previous = scrollY.getPrevious() ?? 0;
-    if (latest > previous && latest > 150) {
-      setHidden(true);
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 60);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
+
+  // Prevent scrolling when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
     } else {
-      setHidden(false);
+      document.body.style.overflow = '';
     }
-  });
-
-  const navLinks = [
-    { to: "/#work", label: "Work" },
-    { to: "/#about", label: "About" },
-    { to: "/#blog", label: "Blog" },
-    { to: "/#contact", label: "Contact" },
-  ];
-
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, to: string) => {
-    if (to.startsWith('/#')) {
-      e.preventDefault();
-      setIsMenuOpen(false);
-      
-      const hash = to.substring(1); // get '#work'
-      
-      if (location.pathname !== '/') {
-        navigate(to);
-      } else {
-        const target = document.querySelector(hash);
-        if (target) {
-          gsap.to(window, { duration: 1, scrollTo: { y: target, offsetY: 80 }, ease: "power3.inOut" });
-          window.history.pushState(null, '', to);
-        }
-      }
-    }
-  };
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
 
   return (
-    <motion.header 
-      variants={{
-        visible: { y: 0 },
-        hidden: { y: "-100%" }
-      }}
-      animate={hidden ? "hidden" : "visible"}
-      transition={{ duration: 0.35, ease: "easeInOut" }}
-      className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-neutral-300/80 to-transparent pt-8 pb-4 backdrop-blur-sm"
-    >
-      <div className="container mx-auto px-6 max-w-6xl">
-        <nav className="flex items-center justify-between bg-neutral-200 rounded-[1.5rem] px-6 py-3 shadow-sm max-w-2xl mx-auto border border-neutral-400/30 transition-colors duration-300">
-          <Link to="/" className="text-neutral-600 hover:text-neutral-800 transition-colors">
-            <Home size={20} />
-          </Link>
-          
-          {/* Desktop Menu */}
-          <div className="hidden md:flex gap-6 items-center">
-            {navLinks.map((link) => (
-              <a 
-                key={link.to}
-                href={link.to}
-                onClick={(e) => handleNavClick(e, link.to)}
-                className="text-sm font-medium text-neutral-600 hover:text-neutral-800 uppercase tracking-wider transition-colors"
-              >
-                {link.label}
+    <>
+      <nav 
+        id="nav" 
+        className={`fixed z-[200] flex justify-between items-center transition-all duration-450 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+          scrolled 
+            ? 'top-4 left-[5%] right-[5%] md:left-[22%] md:right-[22%] gap-6 md:gap-12 px-6 md:px-9 py-3.5 rounded-full bg-bg/85 backdrop-blur-[20px] shadow-[0_4px_24px_rgba(0,0,0,0.1)] dark:bg-[#0C0C0B]/80 dark:shadow-[0_4px_24px_rgba(0,0,0,0.25)]' 
+            : 'top-0 left-0 right-0 px-6 py-[18px] md:px-11 md:py-[22px]'
+        }`}
+      >
+        <Link to="/" onClick={closeMobileMenu} className="nav-logo font-heading text-[15px] font-extrabold tracking-[-0.02em] z-[210]">
+          dheeraj
+        </Link>
+        <div className="nav-right flex items-center gap-4 md:gap-9 z-[210]">
+          <ul className="nav-links hidden md:flex gap-7">
+            <li>
+              <a href="#work" className="text-[12px] font-normal tracking-[0.1em] uppercase text-muted transition-colors duration-300 relative hover:text-fg after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-px after:bg-fg after:transition-all after:duration-300 hover:after:w-full">
+                Work
               </a>
-            ))}
-            <button onClick={toggleTheme} className="text-neutral-600 hover:text-neutral-800 transition-colors ml-2" aria-label="Toggle theme">
-              {isDark ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
-          </div>
+            </li>
+            <li>
+              <a href="#blog" className="text-[12px] font-normal tracking-[0.1em] uppercase text-muted transition-colors duration-300 relative hover:text-fg after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-px after:bg-fg after:transition-all after:duration-300 hover:after:w-full">
+                Blog
+              </a>
+            </li>
+            <li>
+              <a href="#about" className="text-[12px] font-normal tracking-[0.1em] uppercase text-muted transition-colors duration-300 relative hover:text-fg after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-px after:bg-fg after:transition-all after:duration-300 hover:after:w-full">
+                About
+              </a>
+            </li>
+            <li>
+              <a href="#contact" className="text-[12px] font-normal tracking-[0.1em] uppercase text-muted transition-colors duration-300 relative hover:text-fg after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-px after:bg-fg after:transition-all after:duration-300 hover:after:w-full">
+                Contact
+              </a>
+            </li>
+          </ul>
+          <button 
+            onClick={toggleTheme} 
+            className="theme-btn flex items-center gap-[7px] bg-transparent border border-border rounded-full px-[15px] py-[7px] text-muted font-sans text-[11px] tracking-[0.08em] uppercase transition-all duration-300 hover:bg-fg hover:text-bg hover:border-fg"
+            aria-label="Toggle colour scheme"
+          >
+            <span className="t-icon text-[13px]">{isDark ? '◐' : '◑'}</span>
+            <span className="t-label hidden sm:block">{isDark ? 'Light' : 'Dark'}</span>
+          </button>
 
-          {/* Mobile Menu Toggle */}
-          <div className="flex md:hidden items-center gap-4">
-            <button onClick={toggleTheme} className="text-neutral-600 hover:text-neutral-800 transition-colors" aria-label="Toggle theme">
-              {isDark ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
-            <button 
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-neutral-600 hover:text-neutral-800 transition-colors"
-              aria-label="Toggle menu"
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-        </nav>
+          {/* Hamburger Menu Button */}
+          <button
+            className="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-[5px]"
+            onClick={toggleMobileMenu}
+            aria-label="Toggle mobile menu"
+          >
+            <span className={`w-5 h-[1px] bg-fg transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-[6px]' : ''}`}></span>
+            <span className={`w-5 h-[1px] bg-fg transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`}></span>
+            <span className={`w-5 h-[1px] bg-fg transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-[6px]' : ''}`}></span>
+          </button>
+        </div>
+      </nav>
 
-        {/* Mobile Menu Overlay */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="absolute top-full left-6 right-6 mt-4 bg-neutral-200 rounded-[1.5rem] p-6 shadow-xl border border-neutral-400/30 md:hidden"
-            >
-              <div className="flex flex-col gap-4">
-                {navLinks.map((link) => (
-                  <a 
-                    key={link.to}
-                    href={link.to} 
-                    onClick={(e) => handleNavClick(e, link.to)}
-                    className="text-lg font-medium text-neutral-600 hover:text-neutral-800 uppercase tracking-wider transition-colors text-center py-2"
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+      {/* Mobile Menu Overlay */}
+      <div className={`fixed inset-0 bg-bg z-[190] flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] md:hidden ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
+        <ul className="flex flex-col gap-8 text-center">
+          <li>
+            <a href="#work" onClick={closeMobileMenu} className="text-4xl font-heading font-medium tracking-tight hover:text-muted transition-colors">Work</a>
+          </li>
+          <li>
+            <a href="#blog" onClick={closeMobileMenu} className="text-4xl font-heading font-medium tracking-tight hover:text-muted transition-colors">Blog</a>
+          </li>
+          <li>
+            <a href="#about" onClick={closeMobileMenu} className="text-4xl font-heading font-medium tracking-tight hover:text-muted transition-colors">About</a>
+          </li>
+          <li>
+            <a href="#contact" onClick={closeMobileMenu} className="text-4xl font-heading font-medium tracking-tight hover:text-muted transition-colors">Contact</a>
+          </li>
+        </ul>
       </div>
-    </motion.header>
+    </>
   );
 }

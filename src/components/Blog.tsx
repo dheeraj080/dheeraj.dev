@@ -1,6 +1,5 @@
-import { FileText, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -11,107 +10,78 @@ export default function Blog() {
   const container = useRef<HTMLElement>(null);
 
   useGSAP(() => {
-    gsap.from('.blog-header', {
-      y: 30,
-      opacity: 0,
-      duration: 0.8,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: container.current,
-        start: 'top 85%',
-        toggleActions: 'play none none reverse'
-      }
-    });
+    // Skip scroll animations for users who prefer reduced motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      gsap.set('.bcard', { opacity: 1, y: 0 });
+      return;
+    }
 
-    gsap.from('.blog-draft-item', {
-      x: -20,
-      opacity: 0,
-      duration: 0.6,
-      stagger: 0.1,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: '.blog-draft-list',
-        start: 'top 85%',
-        toggleActions: 'play none none reverse'
-      }
-    });
+    const titleSpans = document.querySelectorAll('.s-title-blog .tl span');
+    if (titleSpans.length > 0) {
+      gsap.to(titleSpans, {
+        y: 0, duration: 1.05, stagger: 0.08, ease: 'power3.out',
+        scrollTrigger: { trigger: '.s-title-blog', start: 'top 88%' }
+      });
+    }
 
-    gsap.from('.blog-featured', {
-      y: 50,
-      opacity: 0,
-      duration: 0.8,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: '.blog-featured',
-        start: 'top 85%',
-        toggleActions: 'play none none reverse'
-      }
+    gsap.from('.bcard', {
+      y: 40, opacity: 0, duration: 0.8, stagger: 0.1, ease: 'power2.out',
+      scrollTrigger: { trigger: '.blog-grid', start: 'top 85%' }
     });
   }, { scope: container });
 
   return (
-    <section id="blog" className="py-24 px-6" ref={container}>
-      <div className="container mx-auto max-w-6xl">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          <div className="lg:col-span-3">
-            <div className="blog-header flex items-center gap-4 mb-12">
-              <h2 className="text-4xl m-0">Blog</h2>
-              <div className="w-8 h-8 rounded-[0.75rem] border border-neutral-600 flex items-center justify-center text-neutral-600">
-                <FileText size={16} />
-              </div>
-            </div>
-            
-            <div className="hidden lg:block">
-              <div className="blog-header text-xs font-bold uppercase tracking-widest text-neutral-600 mb-4">In my drafts</div>
-              <ul className="blog-draft-list space-y-4 border-y border-neutral-400 py-6 mb-6">
-                <li className="blog-draft-item">
-                  <Link to="/blog/kafka-microservices-patterns" className="flex items-center gap-4 text-neutral-600 hover:text-neutral-800 cursor-pointer transition-colors">
-                    <FileText size={16} />
-                    <span className="text-sm font-medium">Kafka patterns I use across my microservices</span>
-                  </Link>
-                </li>
-                <li className="blog-draft-item">
-                  <Link to="/blog/database-per-service-postgresql" className="flex items-center gap-4 text-neutral-600 hover:text-neutral-800 cursor-pointer transition-colors">
-                    <FileText size={16} />
-                    <span className="text-sm font-medium">Database-per-service with PostgreSQL in practice</span>
-                  </Link>
-                </li>
-                <li className="blog-draft-item">
-                  <Link to="/blog/timescaledb-financial-data" className="flex items-center gap-4 text-neutral-600 hover:text-neutral-800 cursor-pointer transition-colors">
-                    <FileText size={16} />
-                    <span className="text-sm font-medium">Why I chose TimescaleDB for real-time market data</span>
-                  </Link>
-                </li>
-              </ul>
-              <Link to="/blog" className="blog-header inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-neutral-600 hover:text-neutral-800 transition-colors">
-                View all articles <ArrowRight size={16} />
-              </Link>
-            </div>
-          </div>
-          
-          <div className="lg:col-span-1"></div>
-          
-          <div className="lg:col-span-8">
-            <div className="blog-featured flex flex-col gap-6">
-              <div>
-                <h3 className="text-3xl mb-2">Building production-ready JWT security in Spring Boot</h3>
-                <div className="text-xs font-bold uppercase tracking-widest text-neutral-600">Mar 2026</div>
-              </div>
-              <div className="text-lg text-neutral-700 leading-relaxed max-w-2xl space-y-4">
-                <p>Most tutorials show you how to generate a JWT and validate its signature. They rarely show you how to handle token revocation, algorithm confusion attacks, or how to structure your security filter chain in a microservices environment.</p>
-                <p>In this post, I walk through the exact Spring Security 6 configuration I use for API gateways, including stateless validation, Redis-backed blacklisting, and role-based access control.</p>
-              </div>
-              <div className="pt-4">
-                <Link to="/blog/building-jwt-security-spring-boot" className="inline-flex items-center gap-4 px-6 py-3 rounded-[1.5rem] border border-neutral-400 hover:bg-neutral-100 hover:border-neutral-600 transition-colors group">
-                  <span className="font-medium uppercase tracking-wider text-sm text-neutral-700">Keep Reading</span>
-                  <div className="w-8 h-8 rounded-[0.75rem] bg-neutral-200 group-hover:bg-neutral-300 flex items-center justify-center transition-colors">
-                    <ArrowRight size={16} />
-                  </div>
-                </Link>
-              </div>
-            </div>
-          </div>
+    <section id="blog" className="py-[120px] px-6 md:px-11" ref={container}>
+      <div className="s-header flex justify-between items-center pb-5 border-b border-border mb-16 max-md:mb-10">
+        <div>
+          <p className="s-label text-[10px] tracking-[0.14em] uppercase text-muted mb-2">Writing</p>
+          <h2 className="s-title-blog font-heading text-[clamp(52px,8vw,110px)] font-extrabold tracking-[-0.045em] leading-[0.88] max-md:text-[14vw]">
+            <span className="tl overflow-hidden block">
+              <span className="block translate-y-[110%]">Blog</span>
+            </span>
+          </h2>
         </div>
+        <Link to="/blog" className="hidden md:flex items-center gap-[7px] text-[11px] tracking-[0.09em] uppercase border border-border text-muted px-[14px] py-[7px] rounded-full hover:bg-fg hover:text-bg hover:border-fg transition-all duration-300">
+          View all
+        </Link>
+      </div>
+
+      <div className="blog-grid grid grid-cols-1 md:grid-cols-2 gap-6">
+        <Link to="/blog/building-jwt-security-spring-boot" className="bcard group flex flex-col gap-5 p-7 md:p-9 border border-border rounded-xl hover:border-fg transition-colors duration-300">
+          <div className="flex justify-between items-start">
+            <span className="text-[10px] tracking-[0.14em] uppercase text-muted">Mar 2026</span>
+            <div className="w-8 h-8 rounded-full border border-border flex items-center justify-center group-hover:bg-fg group-hover:border-fg transition-all duration-300">
+              <svg width="12" height="12" viewBox="0 0 14 14" fill="none" className="transition-colors duration-300">
+                <path d="M2 12L12 2M12 2H4M12 2V10" stroke="currentColor" className="text-muted group-hover:text-bg" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+              </svg>
+            </div>
+          </div>
+          <div>
+            <h3 className="text-[24px] font-medium tracking-tight mb-3 group-hover:text-fg transition-colors duration-300">Building production-ready JWT security in Spring Boot</h3>
+            <p className="text-[14px] text-muted leading-[1.6] font-light line-clamp-3">Most tutorials show you how to generate a JWT and validate its signature. They rarely show you how to handle token revocation, algorithm confusion attacks, or how to structure your security filter chain in a microservices environment.</p>
+          </div>
+        </Link>
+
+        <Link to="/blog/kafka-microservices-patterns" className="bcard group flex flex-col gap-5 p-7 md:p-9 border border-border rounded-xl hover:border-fg transition-colors duration-300">
+          <div className="flex justify-between items-start">
+            <span className="text-[10px] tracking-[0.14em] uppercase text-muted">Feb 2026</span>
+            <div className="w-8 h-8 rounded-full border border-border flex items-center justify-center group-hover:bg-fg group-hover:border-fg transition-all duration-300">
+              <svg width="12" height="12" viewBox="0 0 14 14" fill="none" className="transition-colors duration-300">
+                <path d="M2 12L12 2M12 2H4M12 2V10" stroke="currentColor" className="text-muted group-hover:text-bg" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+              </svg>
+            </div>
+          </div>
+          <div>
+            <h3 className="text-[24px] font-medium tracking-tight mb-3 group-hover:text-fg transition-colors duration-300">Kafka patterns I use across my microservices</h3>
+            <p className="text-[14px] text-muted leading-[1.6] font-light line-clamp-3">Event-driven architecture is powerful but complex. Here are the practical Kafka patterns I use to ensure reliable message delivery, handle failures, and maintain data consistency across services.</p>
+          </div>
+        </Link>
+      </div>
+      
+      <div className="mt-8 flex justify-center md:hidden">
+        <Link to="/blog" className="flex items-center gap-[7px] text-[11px] tracking-[0.09em] uppercase border border-border text-muted px-[14px] py-[7px] rounded-full hover:bg-fg hover:text-bg hover:border-fg transition-all duration-300">
+          View all articles
+        </Link>
       </div>
     </section>
   );

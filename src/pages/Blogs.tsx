@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
@@ -39,38 +38,51 @@ export default function Blogs() {
   }, []);
 
   useGSAP(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      gsap.set('.blogs-title .tl span', { y: 0 });
+      gsap.set('.bcard', { opacity: 1, y: 0 });
+      return;
+    }
+
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
     
-    tl.from('.blogs-title', { y: 50, opacity: 0, duration: 0.8, delay: 0.2 })
-      .from('.blog-post-card', { y: 30, opacity: 0, duration: 0.6, stagger: 0.15 }, '-=0.4');
+    tl.to('.blogs-title .tl span', { y: 0, duration: 1.05, stagger: 0.08, delay: 0.2 })
+      .from('.bcard', { y: 40, opacity: 0, duration: 0.8, stagger: 0.1 }, '-=0.6');
   }, { scope: container });
 
   return (
-    <main className="pt-32 pb-24 px-6 min-h-screen" ref={container}>
-      <div className="container mx-auto max-w-4xl">
-        <h1 className="blogs-title font-name text-6xl md:text-7xl lg:text-8xl tracking-tighter leading-none mb-12">
-          Engineering Blog
-        </h1>
-        
-        <div className="space-y-12">
-          {blogPosts.map((post) => (
-            <article key={post.id} className="blog-post-card group border-b border-neutral-400 pb-12">
-              <div className="text-xs font-bold uppercase tracking-widest text-neutral-600 mb-4">{post.date}</div>
-              <h2 className="text-3xl md:text-4xl mb-4 group-hover:text-neutral-500 transition-colors">
-                <Link to={`/blog/${post.id}`}>{post.title}</Link>
-              </h2>
-              <p className="text-lg text-neutral-700 leading-relaxed mb-6 max-w-3xl">
-                {post.excerpt}
-              </p>
-              <Link to={`/blog/${post.id}`} className="inline-flex items-center gap-4 px-6 py-3 rounded-[1.5rem] border border-neutral-400 hover:bg-neutral-100 hover:border-neutral-600 transition-colors">
-                <span className="font-medium uppercase tracking-wider text-sm text-neutral-700">Read Article</span>
-                <div className="w-8 h-8 rounded-[0.75rem] bg-neutral-200 flex items-center justify-center transition-colors">
-                  <ArrowRight size={16} />
-                </div>
-              </Link>
-            </article>
-          ))}
+    <main className="pt-[160px] pb-[120px] px-6 md:px-11 min-h-screen" ref={container}>
+      <div className="s-header flex justify-between items-center pb-5 border-b border-border mb-16 max-md:mb-10">
+        <div>
+          <p className="s-label text-[10px] tracking-[0.14em] uppercase text-muted mb-2">All Articles</p>
+          <h1 className="blogs-title font-heading text-[clamp(52px,8vw,110px)] font-extrabold tracking-[-0.045em] leading-[0.88] max-md:text-[14vw]">
+            <span className="tl overflow-hidden block">
+              <span className="block translate-y-[110%]">Engineering</span>
+            </span>
+            <span className="tl overflow-hidden block">
+              <span className="block translate-y-[110%]">Blog</span>
+            </span>
+          </h1>
         </div>
+      </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {blogPosts.map((post) => (
+          <Link key={post.id} to={`/blog/${post.id}`} className="bcard group flex flex-col gap-5 p-7 md:p-9 border border-border rounded-xl hover:border-fg transition-colors duration-300">
+            <div className="flex justify-between items-start">
+              <span className="text-[10px] tracking-[0.14em] uppercase text-muted">{post.date}</span>
+              <div className="w-8 h-8 rounded-full border border-border flex items-center justify-center group-hover:bg-fg group-hover:border-fg transition-all duration-300">
+                <svg width="12" height="12" viewBox="0 0 14 14" fill="none" className="transition-colors duration-300">
+                  <path d="M2 12L12 2M12 2H4M12 2V10" stroke="currentColor" className="text-muted group-hover:text-bg" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+                </svg>
+              </div>
+            </div>
+            <div>
+              <h2 className="text-[24px] font-medium tracking-tight mb-3 group-hover:text-fg transition-colors duration-300">{post.title}</h2>
+              <p className="text-[14px] text-muted leading-[1.6] font-light line-clamp-3">{post.excerpt}</p>
+            </div>
+          </Link>
+        ))}
       </div>
     </main>
   );

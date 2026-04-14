@@ -11,9 +11,11 @@ import Home from './pages/Home';
 import Project from './pages/Project';
 import BlogArticle from './pages/BlogArticle';
 import Blogs from './pages/Blogs';
+import Preloader from './components/Preloader';
 
 export default function App() {
   const [isDark, setIsDark] = useState(true);
+  const [preloaderComplete, setPreloaderComplete] = useState(false);
 
   useEffect(() => {
     if (isDark) {
@@ -27,7 +29,8 @@ export default function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-neutral-300 text-neutral-700 font-sans selection:bg-neutral-600 selection:text-neutral-100 transition-colors duration-300">
+      <div className="min-h-screen bg-bg text-fg font-sans selection:bg-accent selection:text-white transition-colors duration-400">
+        {!preloaderComplete && <Preloader onComplete={() => setPreloaderComplete(true)} />}
         <Navbar toggleTheme={toggleTheme} isDark={isDark} />
         <Routes>
           <Route path="/" element={<Home />} />
