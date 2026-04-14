@@ -1,0 +1,152 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Syne", ui-sans-serif, system-ui, sans-serif;
+
+  --color-bg: var(--bg);
+  --color-bg2: var(--bg2);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+  --color-accent: var(--accent);
+  --color-accent2: var(--accent2);
+
+  --radius-xl: var(--radius);
+}
+
+:root {
+  --bg: #F0EDE5;
+  --bg2: #E8E5DD;
+  --fg: #0C0C0B;
+  --muted: #5B5A57;
+  --border: rgba(12,12,11,0.1);
+  --border-hover: rgba(12,12,11,0.38);
+  --accent: #FF3D00;
+  --accent2: #D93300;
+  --radius: 14px;
+  --transition: 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+
+  /* Shadcn mappings */
+  --background: var(--bg);
+  --foreground: var(--fg);
+  --card: var(--bg2);
+  --card-foreground: var(--fg);
+  --popover: var(--bg2);
+  --popover-foreground: var(--fg);
+  --primary: var(--fg);
+  --primary-foreground: var(--bg);
+  --secondary: var(--bg2);
+  --secondary-foreground: var(--fg);
+  --muted-foreground: var(--muted);
+  --destructive: oklch(0.577 0.245 27.325);
+  --ring: var(--accent);
+}
+
+.dark {
+  --bg: #0C0C0B;
+  --bg2: #141413;
+  --fg: #EDEDE8;
+  --muted: #93938F;
+  --border: rgba(237,237,232,0.09);
+  --border-hover: rgba(237,237,232,0.38);
+  --accent: #FF3D00;
+  --accent2: #FF7A5C;
+
+  /* Shadcn mappings */
+  --background: var(--bg);
+  --foreground: var(--fg);
+  --card: var(--bg2);
+  --card-foreground: var(--fg);
+  --popover: var(--bg2);
+  --popover-foreground: var(--fg);
+  --primary: var(--fg);
+  --primary-foreground: var(--bg);
+  --secondary: var(--bg2);
+  --secondary-foreground: var(--fg);
+  --muted-foreground: var(--muted);
+  --destructive: oklch(0.704 0.191 22.216);
+  --ring: var(--accent);
+}
+
+@layer base {
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:ital,wght@0,300;0,400;0,600;1,300&display=swap');
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bg text-fg font-sans;
+    overflow-x: hidden;
+    transition: background var(--transition), color var(--transition);
+  }
+
+  /* Noise Overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.028;
+    pointer-events: none;
+    z-index: 9997;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-extrabold tracking-tight;
+  }
+
+  /* Hide scrollbar */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Marquee Animation */
+@keyframes mq { 
+  from { transform: translateX(0); } 
+  to { transform: translateX(-50%); } 
+}
+.animate-mq {
+  animation: mq 28s linear infinite;
+}
+.marquee-wrap:hover .animate-mq { 
+  animation-play-state: paused; 
+}
+
+/* Scroll Hint Line */
+@keyframes shline { 
+  0% { top: -100%; } 
+  100% { top: 100%; } 
+}
+.animate-shline::after {
+  content: '';
+  position: absolute;
+  top: -100%; left: 0;
+  width: 100%; height: 100%;
+  background: var(--accent);
+  animation: shline 2.4s ease infinite;
+}
+
+/* Blink Animation */
+@keyframes blink { 
+  0%, 100% { opacity: 1; } 
+  50% { opacity: 0.4; } 
+}
+.animate-blink {
+  animation: blink 2.2s ease infinite;
+}
