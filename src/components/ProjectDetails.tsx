@@ -36,17 +36,35 @@ export const ProjectDetails = () => {
       exit={{ opacity: 0 }}
       className="min-h-screen bg-surface pt-32 pb-20 px-6 max-w-7xl mx-auto"
     >
-      <button 
-        onClick={() => navigate("/")}
-        className="mb-12 text-text-secondary hover:text-text-primary transition-colors flex items-center gap-2 group"
-      >
-        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-        <span className="text-sm font-bold uppercase tracking-widest">Back to Overview</span>
-      </button>
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+        <button 
+          onClick={() => navigate("/")}
+          className="text-text-secondary hover:text-text-primary transition-colors flex items-center gap-2 group"
+        >
+          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          <span className="text-sm font-bold uppercase tracking-widest">Back to Overview</span>
+        </button>
+
+        <div className="flex gap-6 overflow-x-auto no-scrollbar pb-2 md:pb-0">
+          {[
+            { label: "Overview", href: "#overview" },
+            { label: "Tech Stack", href: "#technical" },
+            { label: "Visuals", href: "#visuals" }
+          ].map(link => (
+            <a 
+              key={link.label} 
+              href={link.href}
+              className="text-[10px] font-bold text-text-secondary uppercase tracking-[0.2em] hover:text-brand-blue transition-colors whitespace-nowrap"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
         <div className="space-y-12">
-          <div>
+          <div id="overview" className="scroll-mt-40">
             <h4 className="text-sm font-bold text-brand-blue uppercase tracking-[0.3em] mb-4">
               Project Case Study
             </h4>
@@ -65,18 +83,18 @@ export const ProjectDetails = () => {
               target="_blank" 
               className="flex items-center gap-3 bg-text-primary text-surface px-8 py-4 rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform"
              >
-               Live Project <ExternalLink className="w-4 h-4" />
+                Live Project <ExternalLink className="w-4 h-4" />
              </a>
              <a 
               href="#" 
               target="_blank" 
               className="flex items-center gap-3 border border-border-subtle px-8 py-4 rounded-full font-bold uppercase tracking-widest hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
              >
-               Source Code <Github className="w-4 h-4" />
+                Source Code <Github className="w-4 h-4" />
              </a>
           </div>
 
-          <div className="pt-12 border-t border-border-subtle space-y-8">
+          <div id="technical" className="pt-12 border-t border-border-subtle space-y-8 scroll-mt-40">
             <div>
                <h4 className="text-xs font-bold text-text-secondary uppercase tracking-widest mb-4">Technologies</h4>
                <div className="flex flex-wrap gap-2">
@@ -101,7 +119,7 @@ export const ProjectDetails = () => {
           </div>
         </div>
 
-        <div className="lg:sticky lg:top-32 space-y-8">
+        <div id="visuals" className="lg:sticky lg:top-32 space-y-8 scroll-mt-40">
            <div className="aspect-[4/3] rounded-[3rem] overflow-hidden border border-border-subtle bg-neutral-100 dark:bg-neutral-900 shadow-2xl">
               <img 
                 src={project.image} 

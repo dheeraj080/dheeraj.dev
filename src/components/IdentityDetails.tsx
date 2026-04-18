@@ -26,14 +26,19 @@ export const IdentityDetails = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
         <div className="space-y-12">
-          <div className="relative inline-block">
-             <div className="w-64 h-64 rounded-[3rem] overflow-hidden border-8 border-white dark:border-neutral-800 shadow-2xl rotate-[-3deg]">
-                <img src="https://picsum.photos/seed/dheeraj/800" className="w-full h-full object-cover grayscale brightness-110" referrerPolicy="no-referrer" />
+          <motion.div 
+            initial={{ scale: 0.95, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            className="relative inline-block"
+          >
+             <div className="w-64 h-64 rounded-[3rem] overflow-hidden border-8 border-white dark:border-neutral-800 shadow-2xl rotate-[-3deg] hover:rotate-0 transition-all duration-700">
+                <img src="https://picsum.photos/seed/dheeraj/800" className="w-full h-full object-cover grayscale brightness-110 hover:grayscale-0 transition-all duration-1000" referrerPolicy="no-referrer" />
              </div>
              <div className="absolute -bottom-4 -right-4 w-20 h-20 bg-brand-blue rounded-2xl flex items-center justify-center shadow-xl rotate-12">
                 <Code2 className="w-10 h-10 text-white" />
              </div>
-          </div>
+          </motion.div>
 
           <div>
              <h4 className="text-sm font-bold text-brand-blue uppercase tracking-[0.3em] mb-4">Engineer Identity</h4>

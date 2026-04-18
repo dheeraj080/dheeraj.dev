@@ -22,9 +22,7 @@ export const IdentityCard = ({ onClick, onMouseEnter, onMouseLeave, hoveredId }:
     >
        <div className="w-full h-full transition-all duration-700 flex items-center justify-center">
           <div className="relative">
-             <div className="absolute -top-40 left-1/2 -translate-x-1/2 h-48 w-1.5 bg-neutral-200 dark:bg-neutral-800 rounded-full group-hover:h-32 transition-all duration-1000 ease-in-out" />
-             
-             <div className="w-full max-w-sm bg-surface dark:bg-neutral-900 rounded-[3rem] shadow-[0_50px_100px_rgba(0,0,0,0.1)] p-12 relative overflow-hidden group-hover:-rotate-2 transition-transform duration-700 border border-border-subtle">
+             <div className="w-full max-w-sm bg-surface dark:bg-neutral-900 rounded-[3rem] shadow-[0_50px_100px_rgba(0,0,0,0.1)] p-12 relative overflow-hidden group-hover:-rotate-[1deg] group-hover:-translate-y-1 transition-transform duration-1000 border border-border-subtle">
                <div className="absolute left-0 top-0 bottom-0 w-14 bg-card-bg flex flex-col items-center justify-center border-r border-border-subtle">
                  <span className="rotate-[-90deg] whitespace-nowrap text-[11px] font-bold text-text-secondary tracking-[0.3em] uppercase opacity-40">Engineering ID</span>
                </div>
@@ -54,7 +52,7 @@ export const IdentityCard = ({ onClick, onMouseEnter, onMouseLeave, hoveredId }:
        </div>
        <IconButton icon={ExternalLink} />
     </Card>
-    <div className="px-6 transition-all duration-500 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0">
+    <div className="px-6 transition-all duration-700 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0">
        <h3 className="text-xl font-bold text-text-primary mb-1">Identity</h3>
        <p className="text-sm font-medium text-text-secondary uppercase tracking-widest">About the engineer</p>
     </div>

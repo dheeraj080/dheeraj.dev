@@ -7,43 +7,43 @@ import { Project } from "./types";
 
 export const projects: Project[] = [
   {
-    id: "infra",
-    title: "Cloud Infrastructure Automation",
-    subtitle: "Terraform, Go, AWS",
-    description: "A robust automation suite for provisioning highly available AWS infrastructure using Terraform and Go. Includes custom provider support and automated scaling policies.",
-    technologies: ["Terraform", "Go", "AWS", "Docker", "CI/CD"],
+    id: "finance",
+    title: "Omni Finance Tracker",
+    subtitle: "React, Node.js, PostgreSQL",
+    description: "A comprehensive wealth management platform featuring real-time market data integration, automated expense categorization, and deep portfolio analytics. Built for performance and absolute data integrity.",
+    technologies: ["React", "TypeScript", "Node.js", "PostgreSQL", "Recharts"],
     liveUrl: "https://example.com",
     repoUrl: "https://github.com/dheerajkamble",
-    image: "https://picsum.photos/seed/infra/1200/800"
+    image: "https://picsum.photos/seed/finance/1200/800"
   },
   {
-    id: "pipeline",
-    title: "Enterprise Data Pipeline",
-    subtitle: "Python, Kafka, Kubernetes",
-    description: "Next-gen data ingestion engine capable of processing millions of events per second with sub-millisecond latency. Built with Kafka for messaging and K8s for orchestrating workers.",
-    technologies: ["Python", "Kafka", "Kubernetes", "Redis", "PostgreSQL"],
+    id: "email",
+    title: "Nexus Email Engine",
+    subtitle: "Go, Redis, gRPC",
+    description: "A high-throughput email orchestration service capable of delivering millions of transactional emails with zero-drop guarantees. Features include dynamic templating and advanced failure-handling logic.",
+    technologies: ["Go", "Redis", "gRPC", "BullMQ", "PostgreSQL"],
     liveUrl: "https://example.com",
     repoUrl: "https://github.com/dheerajkamble",
-    image: "https://picsum.photos/seed/pipeline/1200/800"
+    image: "https://picsum.photos/seed/email/1200/800"
   },
   {
-    id: "arch",
-    title: "Software Architecture Patterns",
-    subtitle: "Documentation, Best Practices",
-    description: "A comprehensive guide and reference implementation for distributed systems patterns including Event Sourcing, CQRS, and Microservices coordination.",
-    technologies: ["Distributed Systems", "Design Patterns", "Microservices"],
+    id: "orchestrator",
+    title: "Aether AI Orchestrator",
+    subtitle: "Python, LangChain, FastAPI",
+    description: "An advanced workflow automation engine that leverages Large Language Models to coordinate complex multi-step tasks. Includes built-in agentic reasoning and self-healing execution blocks.",
+    technologies: ["Python", "LangChain", "FastAPI", "OpenAI", "Vector DB"],
     liveUrl: "https://example.com",
     repoUrl: "https://github.com/dheerajkamble",
-    image: "https://picsum.photos/seed/architecture/1200/800"
+    image: "https://picsum.photos/seed/ai/1200/800"
   },
   {
-    id: "workspace",
-    title: "Development Environment",
-    subtitle: "Workspace Setup",
-    description: "A meticulously crafted Nix-based development environment that ensures reproducibility across multi-platform teams. Includes optimized dotfiles and containerized dev environments.",
-    technologies: ["NixOS", "Docker", "Bash", "Neovim"],
+    id: "terminal",
+    title: "Project Blacklight",
+    subtitle: "Low-latency Trading Lab",
+    description: "A specialized trading terminal designed for sub-millisecond execution. Features high-frequency order book visualizations and custom C++ execution wrappers.",
+    technologies: ["C++", "Rust", "WebAssembly", "ZeroMQ"],
     liveUrl: "https://example.com",
     repoUrl: "https://github.com/dheerajkamble",
-    image: "https://picsum.photos/seed/setup/1200/800"
+    image: "https://picsum.photos/seed/trading/1200/800"
   }
 ];
