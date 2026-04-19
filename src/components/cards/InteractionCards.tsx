@@ -1,44 +1,62 @@
-import { Wallet, Code2, Mail, Sparkles } from "lucide-react";
+import { Wallet, Mail, Brain, Cpu, ArrowUpRight } from "lucide-react";
 import { Card } from "../Card";
-import { IconButton } from "../IconButton";
 
 interface InteractionCardsProps {
   onClickConsole?: () => void;
   onClickCPU?: () => void;
+  onClickAI?: () => void;
+  onClickSystems?: () => void;
   onMouseEnter: () => void;
   onMouseLeave: () => void;
   hoveredId: string | null;
 }
 
-export const InteractionCards = ({ onClickConsole, onClickCPU, onMouseEnter, onMouseLeave, hoveredId }: InteractionCardsProps) => (
-  <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 md:h-[500px] transition-all duration-700 ${hoveredId && hoveredId !== 'interaction' ? 'blur-md opacity-40 scale-95 grayscale' : hoveredId === 'interaction' ? 'z-50 scale-[1.015] -translate-y-2' : 'z-10'}`}>
-      <Card 
-      className="h-[400px] md:h-full flex items-center justify-center group/inner hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+export const InteractionCards = ({ 
+  onClickConsole, 
+  onClickCPU, 
+  onClickAI,
+  onClickSystems,
+  onMouseEnter, 
+  onMouseLeave, 
+  hoveredId 
+}: InteractionCardsProps) => {
+  const items = [
+    { id: 'lab-1', icon: Wallet, label: "Finance", onClick: onClickConsole, color: "text-brand-blue" },
+    { id: 'lab-2', icon: Mail, label: "Messaging", onClick: onClickCPU, color: "text-brand-blue" },
+    { id: 'lab-3', icon: Brain, label: "Neural", onClick: onClickAI, color: "text-brand-blue" },
+    { id: 'lab-4', icon: Cpu, label: "Systems", onClick: onClickSystems, color: "text-brand-blue" }
+  ];
+
+  return (
+    <div 
+      className={`grid grid-cols-2 gap-4 md:gap-6 md:h-[500px] transition-all duration-700 ${hoveredId && hoveredId !== 'interaction' ? 'blur-md opacity-40 scale-95 grayscale' : hoveredId === 'interaction' ? 'z-50 scale-[1.015]' : 'z-10'}`}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      onClick={onClickConsole}
-      ariaLabel="View Finance project lab"
     >
-        <div className="w-32 h-32 bg-surface/80 backdrop-blur-2xl rounded-[2.5rem] shadow-2xl border border-border-subtle flex items-center justify-center group-hover/inner:rotate-[-3deg] group-hover/inner:scale-110 group-hover/inner:-translate-y-2 transition-all duration-700 animate-float">
-           <Wallet className="w-12 h-12 text-brand-blue" />
+      {items.map((item, i) => (
+        <div key={item.id} className="h-full">
+          <Card 
+            onClick={item.onClick}
+            className="h-full flex flex-col justify-between p-6 md:p-8"
+            ariaLabel={`View ${item.label} lab`}
+          >
+            <div className="flex justify-between items-start">
+               <div className="w-10 h-10 rounded-xl bg-surface dark:bg-neutral-800/50 border border-border-subtle flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-sm">
+                  <item.icon className={`w-5 h-5 ${item.color}`} />
+               </div>
+               <ArrowUpRight className="w-4 h-4 text-text-secondary opacity-20 group-hover:opacity-100 transition-opacity" />
+            </div>
+            
+            <div>
+              <span className="text-[9px] font-bold text-text-secondary uppercase tracking-[0.2em] mb-1 block opacity-60">Module {String(i + 1).padStart(2, '0')}</span>
+              <p className="text-sm md:text-base font-bold text-text-primary tracking-tight">{item.label}</p>
+            </div>
+            
+            {/* Internal ambient glow */}
+            <div className="absolute -right-8 -bottom-8 w-24 h-24 bg-brand-blue/5 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+          </Card>
         </div>
-        <IconButton icon={Code2} />
-     </Card>
-     
-     <Card 
-      className="h-[400px] md:h-full flex items-center justify-center group/inner hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      onClick={onClickCPU}
-      ariaLabel="View Email Engine project lab"
-    >
-        <div className="relative animate-float" style={{ animationDelay: '1s' }}>
-           <div className="w-32 h-32 bg-brand-blue rounded-[3rem] shadow-[0_20px_50px_rgba(29,86,184,0.3)] flex items-center justify-center group-hover/inner:rotate-[3deg] group-hover/inner:scale-110 group-hover/inner:-translate-y-2 transition-all duration-700">
-              <Mail className="w-12 h-12 text-white/90" />
-           </div>
-           <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-20 h-2 bg-black/10 dark:bg-white/10 blur-xl rounded-full animate-pulse-slow" />
-        </div>
-        <IconButton icon={Sparkles} />
-     </Card>
-  </div>
-);
+      ))}
+    </div>
+  );
+};

@@ -132,6 +132,8 @@ function BentoOverview({
           <InteractionCards 
             onClickConsole={() => navigate("/project/finance")}
             onClickCPU={() => navigate("/project/email")}
+            onClickAI={() => navigate("/project/orchestrator")}
+            onClickSystems={() => navigate("/project/terminal")}
             onMouseEnter={() => setHoveredId('interaction')}
             onMouseLeave={() => setHoveredId(null)}
             hoveredId={hoveredId}

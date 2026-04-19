@@ -11,8 +11,8 @@ export const Navbar = ({ theme, toggleTheme }: NavbarProps) => {
   const location = useLocation();
   
   const navItems = [
-    { label: "Systems", path: "/" },
-    { label: "Identity", path: "/identity" }
+    { label: "Home", path: "/" },
+    { label: "About", path: "/identity" }
   ];
 
   return (
