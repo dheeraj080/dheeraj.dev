@@ -41,7 +41,7 @@ export const ProjectDetails = () => {
           onClick={() => navigate("/")}
           className="text-text-secondary hover:text-text-primary transition-colors flex items-center gap-2 group"
         >
-          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          <ArrowLeft className="w-4 h-4 transition-transform" />
           <span className="text-sm font-bold uppercase tracking-widest">Back to Overview</span>
         </button>
 
@@ -81,7 +81,7 @@ export const ProjectDetails = () => {
              <a 
               href="#" 
               target="_blank" 
-              className="flex items-center gap-3 bg-text-primary text-surface px-8 py-4 rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform"
+              className="flex items-center gap-3 bg-text-primary text-surface px-8 py-4 rounded-full font-bold uppercase tracking-widest transition-transform"
              >
                 Live Project <ExternalLink className="w-4 h-4" />
              </a>

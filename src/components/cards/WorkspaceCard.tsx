@@ -12,7 +12,7 @@ interface WorkspaceCardProps {
 
 export const WorkspaceCard = ({ onClick, onMouseEnter, onMouseLeave, hoveredId }: WorkspaceCardProps) => (
   <div 
-    className={`flex flex-col gap-6 group relative transition-all duration-500 ${hoveredId && hoveredId !== 'terminal' ? 'blur-md opacity-40 scale-95 grayscale' : hoveredId === 'terminal' ? 'z-50 scale-[1.02]' : 'z-10'}`}
+    className={`flex flex-col gap-6 group relative transition-all duration-500 ${hoveredId && hoveredId !== 'terminal' ? 'blur-md opacity-40 scale-95 grayscale' : hoveredId === 'terminal' ? 'z-50' : 'z-10'}`}
     onMouseEnter={onMouseEnter}
     onMouseLeave={onMouseLeave}
   >

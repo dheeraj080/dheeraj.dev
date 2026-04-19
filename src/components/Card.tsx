@@ -26,12 +26,12 @@ export const Card = ({ children, className = "", span = "", onClick, onMouseEnte
 
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 15 }}
+      initial={{ opacity: 0, y: 5 }}
       whileInView={{ opacity: 1, y: 0 }}
       whileHover={onClick ? { 
-        y: -4,
+        y: -2,
         transition: { 
-          duration: 0.4,
+          duration: 0.3,
           ease: [0.22, 1, 0.36, 1]
         }
       } : {}}

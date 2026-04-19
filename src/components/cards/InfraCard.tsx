@@ -12,7 +12,7 @@ interface InfraCardProps {
 
 export const InfraCard = ({ onClick, onMouseEnter, onMouseLeave, hoveredId }: InfraCardProps) => (
   <div 
-    className={`flex flex-col gap-6 group relative transition-all duration-500 ${hoveredId && hoveredId !== 'finance' ? 'blur-md opacity-40 scale-95 grayscale' : hoveredId === 'finance' ? 'z-50 scale-[1.02]' : 'z-10'}`}
+    className={`flex flex-col gap-6 group relative transition-all duration-500 ${hoveredId && hoveredId !== 'finance' ? 'blur-md opacity-40 scale-95 grayscale' : hoveredId === 'finance' ? 'z-50' : 'z-10'}`}
     onMouseEnter={onMouseEnter}
     onMouseLeave={onMouseLeave}
   >
@@ -22,7 +22,7 @@ export const InfraCard = ({ onClick, onMouseEnter, onMouseLeave, hoveredId }: In
       ariaLabel="View Omni Finance Tracker project"
     >
       <div className="w-full h-full transition-all duration-700">
-        <div className="relative w-full max-w-lg bg-white dark:bg-neutral-900 rounded-[2.5rem] p-8 overflow-hidden border border-border-subtle h-full flex flex-col justify-between transition-colors duration-700">
+        <div className="relative w-full max-w-lg bg-surface dark:bg-neutral-900 rounded-[2.5rem] p-8 overflow-hidden border border-border-subtle h-full flex flex-col justify-between transition-colors duration-700">
           <div className="flex justify-between items-start">
              <div>
                 <h4 className="text-[10px] font-bold text-text-secondary uppercase tracking-[0.3em] mb-2">Total Balance</h4>
@@ -44,7 +44,7 @@ export const InfraCard = ({ onClick, onMouseEnter, onMouseLeave, hoveredId }: In
                 { name: "Crypto", val: "-$420", color: "text-red-500" },
                 { name: "Savings", val: "+$850", color: "text-green-500" }
              ].map((item, i) => (
-               <div key={item.name} className="flex justify-between items-center p-4 rounded-2xl bg-neutral-50 dark:bg-neutral-800/50 border border-border-subtle">
+               <div key={item.name} className="flex justify-between items-center p-4 rounded-2xl bg-surface dark:bg-neutral-800/50 border border-border-subtle">
                   <span className="text-xs font-bold text-text-primary uppercase tracking-wider">{item.name}</span>
                   <span className={`text-xs font-bold ${item.color}`}>{item.val}</span>
                </div>

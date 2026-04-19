@@ -21,15 +21,43 @@ export const InteractionCards = ({
   hoveredId 
 }: InteractionCardsProps) => {
   const items = [
-    { id: 'lab-1', icon: Wallet, label: "Finance", onClick: onClickConsole, color: "text-brand-blue" },
-    { id: 'lab-2', icon: Mail, label: "Messaging", onClick: onClickCPU, color: "text-brand-blue" },
-    { id: 'lab-3', icon: Brain, label: "Neural", onClick: onClickAI, color: "text-brand-blue" },
-    { id: 'lab-4', icon: Cpu, label: "Systems", onClick: onClickSystems, color: "text-brand-blue" }
+    { 
+      id: 'lab-1', 
+      icon: Wallet, 
+      label: "Finance", 
+      description: "Real-time trading dashboards",
+      onClick: onClickConsole, 
+      color: "text-brand-blue" 
+    },
+    { 
+      id: 'lab-2', 
+      icon: Mail, 
+      label: "Messaging", 
+      description: "Scalable chat infrastructure",
+      onClick: onClickCPU, 
+      color: "text-brand-blue" 
+    },
+    { 
+      id: 'lab-3', 
+      icon: Brain, 
+      label: "Neural", 
+      description: "ML pipeline tooling",
+      onClick: onClickAI, 
+      color: "text-brand-blue" 
+    },
+    { 
+      id: 'lab-4', 
+      icon: Cpu, 
+      label: "Systems", 
+      description: "Low-latency backend services",
+      onClick: onClickSystems, 
+      color: "text-brand-blue" 
+    }
   ];
 
   return (
     <div 
-      className={`grid grid-cols-2 gap-4 md:gap-6 md:h-[500px] transition-all duration-700 ${hoveredId && hoveredId !== 'interaction' ? 'blur-md opacity-40 scale-95 grayscale' : hoveredId === 'interaction' ? 'z-50 scale-[1.015]' : 'z-10'}`}
+      className={`grid grid-cols-2 gap-4 md:gap-6 md:h-[500px] transition-all duration-700 ${hoveredId && hoveredId !== 'interaction' ? 'blur-md opacity-40 scale-95 grayscale' : hoveredId === 'interaction' ? 'z-50' : 'z-10'}`}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
@@ -47,9 +75,10 @@ export const InteractionCards = ({
                <ArrowUpRight className="w-3 h-3 text-text-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
             
-            <div>
-              <span className="text-[8px] font-bold text-text-secondary uppercase tracking-[0.2em] mb-1 block opacity-40">Lab {String(i + 1).padStart(2, '0')}</span>
+            <div className="space-y-1">
+              <span className="text-[8px] font-bold text-text-secondary uppercase tracking-[0.2em] block opacity-40">Lab {String(i + 1).padStart(2, '0')}</span>
               <p className="text-sm font-bold text-text-primary tracking-tight">{item.label}</p>
+              <p className="text-[10px] text-text-secondary font-medium leading-tight">{item.description}</p>
             </div>
           </Card>
         </div>

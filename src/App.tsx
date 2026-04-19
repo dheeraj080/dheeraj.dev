@@ -49,7 +49,7 @@ function BentoOverview({
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 10 },
     visible: { 
       opacity: 1, 
       y: 0,
@@ -62,7 +62,7 @@ function BentoOverview({
       {/* Hero Section */}
       <section className={`w-full mb-24 text-left self-start max-w-2xl px-2 transition-all duration-700 ${hoveredId ? 'opacity-20 pointer-events-none' : ''}`}>
         <motion.div
-          initial={{ opacity: 0, x: -10 }}
+          initial={{ opacity: 0, x: -5 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
@@ -95,75 +95,110 @@ function BentoOverview({
       </section>
 
       {/* Bento Grid */}
-      <motion.div 
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 max-w-6xl mx-auto"
-      >
-        <motion.div variants={itemVariants}>
-          <InfraCard 
-            onClick={() => navigate(`/project/${projects[0].id}`)}
-            onMouseEnter={() => setHoveredId('finance')}
-            onMouseLeave={() => setHoveredId(null)}
-            hoveredId={hoveredId}
-          />
-        </motion.div>
+      <div id="projects" className="scroll-mt-32 w-full text-left">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 max-w-6xl mx-auto"
+        >
+          <motion.div variants={itemVariants}>
+            <InfraCard 
+              onClick={() => navigate(`/project/${projects[0].id}`)}
+              onMouseEnter={() => setHoveredId('finance')}
+              onMouseLeave={() => setHoveredId(null)}
+              hoveredId={hoveredId}
+            />
+          </motion.div>
 
-        <motion.div variants={itemVariants}>
-          <PipelineCard 
-            onClick={() => navigate(`/project/${projects[1].id}`)}
-            onMouseEnter={() => setHoveredId('email')}
-            onMouseLeave={() => setHoveredId(null)}
-            hoveredId={hoveredId}
-          />
-        </motion.div>
+          <motion.div variants={itemVariants}>
+            <PipelineCard 
+              onClick={() => navigate(`/project/${projects[1].id}`)}
+              onMouseEnter={() => setHoveredId('email')}
+              onMouseLeave={() => setHoveredId(null)}
+              hoveredId={hoveredId}
+            />
+          </motion.div>
 
-        <motion.div variants={itemVariants}>
-          <ManifestCard 
-            onClick={() => navigate(`/project/${projects[2].id}`)}
-            onMouseEnter={() => setHoveredId('orchestrator')}
-            onMouseLeave={() => setHoveredId(null)}
-            hoveredId={hoveredId}
-          />
-        </motion.div>
+          <motion.div variants={itemVariants}>
+            <ManifestCard 
+              onClick={() => navigate(`/project/${projects[2].id}`)}
+              onMouseEnter={() => setHoveredId('orchestrator')}
+              onMouseLeave={() => setHoveredId(null)}
+              hoveredId={hoveredId}
+            />
+          </motion.div>
 
-        <motion.div variants={itemVariants}>
-          <InteractionCards 
-            onClickConsole={() => navigate("/project/finance")}
-            onClickCPU={() => navigate("/project/email")}
-            onClickAI={() => navigate("/project/orchestrator")}
-            onClickSystems={() => navigate("/project/terminal")}
-            onMouseEnter={() => setHoveredId('interaction')}
-            onMouseLeave={() => setHoveredId(null)}
-            hoveredId={hoveredId}
-          />
-        </motion.div>
+          <motion.div variants={itemVariants}>
+            <InteractionCards 
+              onClickConsole={() => navigate("/project/finance")}
+              onClickCPU={() => navigate("/project/email")}
+              onClickAI={() => navigate("/project/orchestrator")}
+              onClickSystems={() => navigate("/project/terminal")}
+              onMouseEnter={() => setHoveredId('interaction')}
+              onMouseLeave={() => setHoveredId(null)}
+              hoveredId={hoveredId}
+            />
+          </motion.div>
 
-        <motion.div variants={itemVariants}>
-          <IdentityCard 
-            onClick={() => navigate("/identity")}
-            onMouseEnter={() => setHoveredId('id-card')}
-            onMouseLeave={() => setHoveredId(null)}
-            hoveredId={hoveredId}
-          />
-        </motion.div>
+          <motion.div variants={itemVariants}>
+            <IdentityCard 
+              onClick={() => navigate("/identity")}
+              onMouseEnter={() => setHoveredId('id-card')}
+              onMouseLeave={() => setHoveredId(null)}
+              hoveredId={hoveredId}
+            />
+          </motion.div>
 
-        <motion.div variants={itemVariants}>
-          <WorkspaceCard 
-            onClick={() => navigate(`/project/${projects[3].id}`)}
-            onMouseEnter={() => setHoveredId('terminal')}
-            onMouseLeave={() => setHoveredId(null)}
-            hoveredId={hoveredId}
-          />
+          <motion.div variants={itemVariants}>
+            <WorkspaceCard 
+              onClick={() => navigate(`/project/${projects[3].id}`)}
+              onMouseEnter={() => setHoveredId('terminal')}
+              onMouseLeave={() => setHoveredId(null)}
+              hoveredId={hoveredId}
+            />
+          </motion.div>
         </motion.div>
-      </motion.div>
+      </div>
 
-      <footer className={`mt-32 pb-12 text-[10px] font-bold uppercase tracking-[0.2em] text-text-secondary flex items-center justify-between w-full transition-all duration-700 ${hoveredId ? 'opacity-10' : ''}`}>
-        <span>© 2026. <a href="#" className="text-text-primary hover:text-brand-blue transition-colors underline decoration-border-subtle underline-offset-4">Dheeraj Kamble</a></span>
-        <div className="flex gap-4">
-           <a href="#" className="hover:text-text-primary transition-colors">Privacy</a>
-           <a href="#" className="hover:text-text-primary transition-colors">Terms</a>
+      <footer className={`mt-48 pb-20 w-full transition-all duration-700 ${hoveredId ? 'opacity-10' : ''}`}>
+        <div className="border-t border-border-subtle pt-12 flex flex-col md:flex-row justify-between gap-12 text-left">
+          <div className="space-y-4">
+            <h3 className="text-sm font-bold text-text-primary uppercase tracking-[0.3em]">Dheeraj Kamble</h3>
+            <p className="text-sm text-text-secondary max-w-xs leading-relaxed font-medium">
+              Open to freelance & full-time roles. I specialize in building high-fidelity systems and scalable web applications.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-2 gap-12 md:gap-24">
+            <div className="space-y-4">
+              <h4 className="text-[10px] font-bold text-text-secondary uppercase tracking-[0.2em]">Contact</h4>
+              <div className="flex flex-col gap-3 text-sm font-bold text-text-primary">
+                <a href="mailto:dheeraj@example.com" className="hover:text-brand-blue transition-colors flex items-center gap-2">
+                  <Mail className="w-4 h-4" /> Email
+                </a>
+              </div>
+            </div>
+            <div className="space-y-4">
+              <h4 className="text-[10px] font-bold text-text-secondary uppercase tracking-[0.2em]">Follow</h4>
+              <div className="flex flex-col gap-3 text-sm font-bold text-text-primary">
+                <a href="#" className="hover:text-brand-blue transition-colors flex items-center gap-2">
+                  <Github className="w-4 h-4" /> GitHub
+                </a>
+                <a href="#" className="hover:text-brand-blue transition-colors flex items-center gap-2">
+                  <Linkedin className="w-4 h-4" /> LinkedIn
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div className="mt-20 pt-8 border-t border-border-subtle border-dashed flex items-center justify-between text-[10px] font-bold uppercase tracking-[0.2em] text-text-secondary">
+          <span>© 2026. All rights reserved.</span>
+          <div className="flex gap-6">
+             <a href="#" className="hover:text-text-primary transition-colors">Privacy</a>
+             <a href="#" className="hover:text-text-primary transition-colors">Terms</a>
+          </div>
         </div>
       </footer>
     </>

@@ -12,7 +12,7 @@ interface ManifestCardProps {
 
 export const ManifestCard = ({ onClick, onMouseEnter, onMouseLeave, hoveredId }: ManifestCardProps) => (
   <div 
-    className={`flex flex-col gap-6 group relative transition-all duration-500 ${hoveredId && hoveredId !== 'orchestrator' ? 'blur-md opacity-40 scale-95 grayscale' : hoveredId === 'orchestrator' ? 'z-50 scale-[1.02]' : 'z-10'}`}
+    className={`flex flex-col gap-6 group relative transition-all duration-500 ${hoveredId && hoveredId !== 'orchestrator' ? 'blur-md opacity-40 scale-95 grayscale' : hoveredId === 'orchestrator' ? 'z-50' : 'z-10'}`}
     onMouseEnter={onMouseEnter}
     onMouseLeave={onMouseLeave}
   >
@@ -44,7 +44,7 @@ export const ManifestCard = ({ onClick, onMouseEnter, onMouseLeave, hoveredId }:
 
                 <div className="flex justify-center gap-4">
                    {[Code2, Brain, Sparkles].map((Icon, i) => (
-                     <div key={i} className="w-12 h-12 bg-surface rounded-2xl border border-border-subtle flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform">
+                     <div key={i} className="w-12 h-12 bg-surface rounded-2xl border border-border-subtle flex items-center justify-center shadow-lg transform transition-transform">
                         <Icon className="w-5 h-5 text-brand-blue" />
                      </div>
                    ))}

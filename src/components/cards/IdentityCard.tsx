@@ -11,7 +11,7 @@ interface IdentityCardProps {
 
 export const IdentityCard = ({ onClick, onMouseEnter, onMouseLeave, hoveredId }: IdentityCardProps) => (
   <div 
-    className={`flex flex-col gap-6 group relative transition-all duration-500 ${hoveredId && hoveredId !== 'id-card' ? 'blur-md opacity-40 scale-95 grayscale' : hoveredId === 'id-card' ? 'z-50 scale-[1.02]' : 'z-10'}`}
+    className={`flex flex-col gap-6 group relative transition-all duration-500 ${hoveredId && hoveredId !== 'id-card' ? 'blur-md opacity-40 scale-95 grayscale' : hoveredId === 'id-card' ? 'z-50' : 'z-10'}`}
     onMouseEnter={onMouseEnter}
     onMouseLeave={onMouseLeave}
   >
@@ -36,15 +36,20 @@ export const IdentityCard = ({ onClick, onMouseEnter, onMouseLeave, hoveredId }:
                  </div>
                  <div className="space-y-4 pt-8 border-t border-border-subtle">
                    {[
-                     { icon: Cpu, text: "Systems logic" },
-                     { icon: Code2, text: "Backend mastery" },
-                     { icon: MapPin, text: "Based in Asia" }
+                     { icon: Cpu, text: "5+ Years Experience" },
+                     { icon: Code2, text: "Focusing on Distributed Systems" },
+                     { icon: MapPin, text: "Based in Asia • Available Worldwide" }
                    ].map(item => (
-                     <div key={item.text} className="flex items-center gap-3 text-text-secondary hover:text-text-primary transition-colors">
-                       <item.icon className="w-4 h-4 opacity-40" />
+                     <div key={item.text} className="flex items-center gap-3 text-text-secondary hover:text-text-primary transition-colors group/item">
+                       <item.icon className="w-4 h-4 opacity-40 group-hover/item:text-brand-blue group-hover/item:opacity-100 transition-all" />
                        <span className="text-[12px] font-bold tracking-tight">{item.text}</span>
                      </div>
                    ))}
+                   <div className="mt-6 border-l-2 border-brand-blue pl-4">
+                     <p className="text-[11px] text-text-secondary italic leading-relaxed">
+                       "Building for the next billion users, one scalable foundation at a time."
+                     </p>
+                   </div>
                  </div>
                </div>
              </div>

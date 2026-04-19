@@ -12,7 +12,7 @@ export const IdentityDetails = () => {
 
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       className="min-h-screen bg-surface pt-32 pb-20 px-6 max-w-7xl mx-auto"
     >
@@ -20,19 +20,19 @@ export const IdentityDetails = () => {
         onClick={() => navigate("/")}
         className="mb-12 text-text-secondary hover:text-text-primary transition-colors flex items-center gap-2 group"
       >
-        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+        <ArrowLeft className="w-4 h-4 transition-transform" />
         <span className="text-sm font-bold uppercase tracking-widest">Back to Overview</span>
       </button>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
         <div className="space-y-12">
           <motion.div 
-            initial={{ scale: 0.95, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.8 }}
             className="relative inline-block"
           >
-             <div className="w-64 h-64 rounded-[3rem] overflow-hidden border-8 border-white dark:border-neutral-800 shadow-2xl rotate-[-3deg] hover:rotate-0 transition-all duration-700">
+             <div className="w-64 h-64 rounded-[3rem] overflow-hidden border-8 border-white dark:border-neutral-800 shadow-2xl transition-all duration-700">
                 <img src="https://picsum.photos/seed/dheeraj/800" className="w-full h-full object-cover grayscale brightness-110 hover:grayscale-0 transition-all duration-1000" referrerPolicy="no-referrer" />
              </div>
              <div className="absolute -bottom-4 -right-4 w-20 h-20 bg-brand-blue rounded-2xl flex items-center justify-center shadow-xl rotate-12">
@@ -76,7 +76,7 @@ export const IdentityDetails = () => {
                   { icon: MapPin, title: "Global Perspective", description: "Based in Asia, working with international teams to deploy solutions at scale." }
                 ].map(pillar => (
                   <div key={pillar.title} className="flex gap-6 items-start">
-                     <div className="w-12 h-12 bg-neutral-100 dark:bg-neutral-800 rounded-2xl flex-shrink-0 flex items-center justify-center">
+                     <div className="w-12 h-12 bg-card-bg rounded-2xl flex-shrink-0 flex items-center justify-center">
                         <pillar.icon className="w-6 h-6 text-brand-blue" />
                      </div>
                      <div>
@@ -88,10 +88,10 @@ export const IdentityDetails = () => {
              </div>
           </div>
 
-          <div className="p-12 bg-neutral-100 dark:bg-neutral-800 rounded-[3rem] border border-border-subtle">
+          <div className="p-12 bg-card-bg rounded-[3rem] border border-border-subtle">
              <h3 className="text-xl font-bold text-text-primary mb-4">Availability</h3>
              <p className="text-text-secondary mb-8">Currently exploring high-impact opportunities in Cloud Infrastructure and Fintech architecture.</p>
-             <button className="w-full py-4 bg-brand-blue text-white rounded-2xl font-bold uppercase tracking-widest shadow-lg shadow-brand-blue/20 hover:scale-105 transition-transform">
+             <button className="w-full py-4 bg-brand-blue text-white rounded-2xl font-bold uppercase tracking-widest shadow-lg shadow-brand-blue/20 transition-transform">
                 Download Technical CV
              </button>
           </div>
