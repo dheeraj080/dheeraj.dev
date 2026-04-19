@@ -22,13 +22,13 @@ export const IdentityCard = ({ onClick, onMouseEnter, onMouseLeave, hoveredId }:
     >
        <div className="w-full h-full transition-all duration-700 flex items-center justify-center">
           <div className="relative">
-             <div className="w-full max-w-sm bg-surface dark:bg-neutral-900 rounded-[3rem] shadow-[0_50px_100px_rgba(0,0,0,0.1)] p-12 relative overflow-hidden group-hover:-rotate-[1deg] group-hover:-translate-y-1 transition-transform duration-1000 border border-border-subtle">
+             <div className="w-full max-w-sm bg-surface dark:bg-neutral-900 rounded-[2.5rem] shadow-sm p-12 relative overflow-hidden transition-all duration-700 border border-border-subtle">
                <div className="absolute left-0 top-0 bottom-0 w-14 bg-card-bg flex flex-col items-center justify-center border-r border-border-subtle">
                  <span className="rotate-[-90deg] whitespace-nowrap text-[11px] font-bold text-text-secondary tracking-[0.3em] uppercase opacity-40">Engineering ID</span>
                </div>
                <div className="pl-12 flex flex-col gap-8">
-                 <div className="w-24 h-24 rounded-full bg-card-bg overflow-hidden ring-8 ring-card-bg shadow-2xl">
-                   <img src="https://picsum.photos/seed/dheeraj/400" className="w-full h-full object-cover grayscale brightness-110" referrerPolicy="no-referrer" />
+                 <div className="w-24 h-24 rounded-full bg-card-bg overflow-hidden ring-4 ring-card-bg shadow-lg">
+                   <img src="https://picsum.photos/seed/dheeraj/400" className="w-full h-full object-cover brightness-110" referrerPolicy="no-referrer" />
                  </div>
                  <div>
                    <h3 className="text-2xl font-bold text-text-primary tracking-tight mb-1">Dheeraj Kamble</h3>

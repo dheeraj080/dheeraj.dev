@@ -24,7 +24,7 @@ export const PipelineCard = ({ onClick, onMouseEnter, onMouseLeave, hoveredId }:
       ariaLabel="View Nexus Email Engine project"
     >
       <div className="w-full h-full transition-all duration-700">
-        <div className="w-full h-full max-w-lg bg-neutral-50 dark:bg-neutral-900 rounded-[2.5rem] shadow-2xl p-10 border border-border-subtle group-hover:rotate-[0.5deg] group-hover:-translate-y-1 transition-transform duration-1000 overflow-hidden relative flex flex-col justify-between">
+        <div className="w-full h-full max-w-lg bg-neutral-50 dark:bg-neutral-900 rounded-[2.5rem] shadow-sm p-10 border border-border-subtle transition-all duration-700 overflow-hidden relative flex flex-col justify-between">
           <div className="flex justify-between items-center">
              <div className="p-4 bg-brand-blue rounded-2xl shadow-lg">
                 <Send className="w-6 h-6 text-white" />

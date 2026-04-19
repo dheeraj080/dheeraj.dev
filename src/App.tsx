@@ -60,13 +60,13 @@ function BentoOverview({
   return (
     <>
       {/* Hero Section */}
-      <section className={`w-full mb-24 text-left self-start max-w-2xl px-2 transition-all duration-500 ${hoveredId ? 'blur-md opacity-40 grayscale scale-95' : ''}`}>
+      <section className={`w-full mb-24 text-left self-start max-w-2xl px-2 transition-all duration-700 ${hoveredId ? 'opacity-20 pointer-events-none' : ''}`}>
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
+          initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h1 className="text-[17px] font-medium mb-12 text-text-primary tracking-tight">Dheeraj Kamble</h1>
+          <h1 className="text-sm font-bold mb-12 text-text-secondary uppercase tracking-[0.3em]">Dheeraj Kamble</h1>
           
           <h2 className="text-3xl md:text-5xl font-medium leading-[1.2] mb-12 text-text-primary tracking-tight text-balance">
             I build scalable foundations <br className="hidden md:block" /> and innovative web solutions.
@@ -159,13 +159,11 @@ function BentoOverview({
         </motion.div>
       </motion.div>
 
-      <footer className={`mt-24 text-sm font-medium text-text-secondary flex items-center gap-4 flex-col md:flex-row transition-all duration-500 ${hoveredId ? 'blur-md opacity-40 grayscale scale-95' : ''}`}>
-        <span>© 2026. Made by <a href="#" className="text-text-primary hover:text-brand-blue transition-colors underline decoration-border-subtle underline-offset-4">@dheerajkamble</a></span>
-        <div className="flex gap-1.5">
-           <div className="w-5 h-5 bg-[#85b8ff] rounded-sm" />
-           <div className="w-5 h-5 bg-brand-blue rounded-sm" />
-           <div className="w-5 h-5 bg-[#0052c4] rounded-sm" />
-           <div className="w-5 h-5 bg-[#adcfff] rounded-sm" />
+      <footer className={`mt-32 pb-12 text-[10px] font-bold uppercase tracking-[0.2em] text-text-secondary flex items-center justify-between w-full transition-all duration-700 ${hoveredId ? 'opacity-10' : ''}`}>
+        <span>© 2026. <a href="#" className="text-text-primary hover:text-brand-blue transition-colors underline decoration-border-subtle underline-offset-4">Dheeraj Kamble</a></span>
+        <div className="flex gap-4">
+           <a href="#" className="hover:text-text-primary transition-colors">Privacy</a>
+           <a href="#" className="hover:text-text-primary transition-colors">Terms</a>
         </div>
       </footer>
     </>

@@ -22,16 +22,16 @@ export const WorkspaceCard = ({ onClick, onMouseEnter, onMouseLeave, hoveredId }
       ariaLabel="View Project Blacklight: Low-latency Trading Lab"
     >
        <div className="w-full h-full transition-all duration-700 flex items-center justify-center">
-          <div className="w-full h-full max-w-lg bg-surface dark:bg-neutral-900 rounded-[3rem] shadow-2xl p-10 flex flex-col border border-border-subtle group-hover:translate-y-2 group-hover:-rotate-[0.5deg] transition-transform duration-1000">
+          <div className="w-full h-full max-w-lg bg-surface dark:bg-neutral-900 rounded-[2.5rem] shadow-sm p-10 flex flex-col border border-border-subtle transition-all duration-700">
              <div className="flex justify-between items-center mb-10">
                 <div className="flex items-center gap-3">
-                   <div className="w-10 h-10 bg-brand-blue rounded-2xl flex items-center justify-center animate-pulse">
+                   <div className="w-10 h-10 bg-brand-blue rounded-2xl flex items-center justify-center">
                       <Zap className="w-5 h-5 text-white" />
                    </div>
                    <span className="text-xs font-bold uppercase tracking-[0.2em] text-text-primary">Blacklight v4</span>
                 </div>
                 <div className="flex gap-1.5 px-4 py-2 bg-green-500/10 rounded-full border border-green-500/20">
-                   <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                   <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
                    <span className="text-[10px] font-bold text-green-500 uppercase tracking-widest">Low Latency Mode</span>
                 </div>
              </div>
@@ -53,7 +53,7 @@ export const WorkspaceCard = ({ onClick, onMouseEnter, onMouseLeave, hoveredId }
                       ))}
                    </div>
 
-                   <div className="bg-surface/80 backdrop-blur-md p-4 rounded-2xl border border-border-subtle flex justify-between items-center animate-float relative z-10">
+                   <div className="bg-surface/80 backdrop-blur-md p-4 rounded-xl border border-border-subtle flex justify-between items-center relative z-10 transition-colors">
                       <div className="flex items-center gap-2">
                          <BarChart className="w-4 h-4 text-brand-blue" />
                          <span className="text-[10px] font-bold text-text-primary uppercase tracking-widest">Order Book: ACTIVE</span>

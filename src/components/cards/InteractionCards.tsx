@@ -41,19 +41,16 @@ export const InteractionCards = ({
             ariaLabel={`View ${item.label} lab`}
           >
             <div className="flex justify-between items-start">
-               <div className="w-10 h-10 rounded-xl bg-surface dark:bg-neutral-800/50 border border-border-subtle flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-sm">
-                  <item.icon className={`w-5 h-5 ${item.color}`} />
+               <div className="w-10 h-10 rounded-xl bg-surface dark:bg-neutral-800/50 border border-border-subtle flex items-center justify-center group-hover:scale-105 transition-all duration-500 shadow-sm">
+                  <item.icon className={`w-4 h-4 ${item.color}`} />
                </div>
-               <ArrowUpRight className="w-4 h-4 text-text-secondary opacity-20 group-hover:opacity-100 transition-opacity" />
+               <ArrowUpRight className="w-3 h-3 text-text-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
             
             <div>
-              <span className="text-[9px] font-bold text-text-secondary uppercase tracking-[0.2em] mb-1 block opacity-60">Module {String(i + 1).padStart(2, '0')}</span>
-              <p className="text-sm md:text-base font-bold text-text-primary tracking-tight">{item.label}</p>
+              <span className="text-[8px] font-bold text-text-secondary uppercase tracking-[0.2em] mb-1 block opacity-40">Lab {String(i + 1).padStart(2, '0')}</span>
+              <p className="text-sm font-bold text-text-primary tracking-tight">{item.label}</p>
             </div>
-            
-            {/* Internal ambient glow */}
-            <div className="absolute -right-8 -bottom-8 w-24 h-24 bg-brand-blue/5 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
           </Card>
         </div>
       ))}

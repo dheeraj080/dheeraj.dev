@@ -22,7 +22,7 @@ export const InfraCard = ({ onClick, onMouseEnter, onMouseLeave, hoveredId }: In
       ariaLabel="View Omni Finance Tracker project"
     >
       <div className="w-full h-full transition-all duration-700">
-        <div className="relative w-full max-w-lg bg-white dark:bg-neutral-900 rounded-[2.5rem] shadow-[0_40px_80px_rgba(0,0,0,0.1)] p-8 overflow-hidden border border-border-subtle h-full flex flex-col justify-between group-hover:-translate-y-2 transition-transform duration-1000">
+        <div className="relative w-full max-w-lg bg-white dark:bg-neutral-900 rounded-[2.5rem] p-8 overflow-hidden border border-border-subtle h-full flex flex-col justify-between transition-colors duration-700">
           <div className="flex justify-between items-start">
              <div>
                 <h4 className="text-[10px] font-bold text-text-secondary uppercase tracking-[0.3em] mb-2">Total Balance</h4>

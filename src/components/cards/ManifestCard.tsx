@@ -22,13 +22,13 @@ export const ManifestCard = ({ onClick, onMouseEnter, onMouseLeave, hoveredId }:
       ariaLabel="View Aether AI Orchestrator project"
     >
        <div className="w-full h-full transition-all duration-700">
-          <div className="w-full h-full max-w-lg bg-surface dark:bg-neutral-900 rounded-[2.5rem] shadow-2xl overflow-hidden border border-border-subtle group-hover:-translate-y-3 group-hover:rotate-[-0.5deg] transition-transform duration-1000 p-10 flex flex-col justify-between">
+          <div className="w-full h-full max-w-lg bg-surface dark:bg-neutral-900 rounded-[2.5rem] shadow-sm overflow-hidden border border-border-subtle p-10 flex flex-col justify-between transition-all duration-700">
              <div className="flex justify-between items-center">
                 <div className="flex items-center gap-2">
-                   <div className="w-2 h-2 rounded-full bg-brand-blue animate-ping" />
+                   <div className="w-2 h-2 rounded-full bg-brand-blue" />
                    <span className="text-[10px] font-bold text-brand-blue uppercase tracking-widest">Neural Syncing</span>
                 </div>
-                <Brain className="w-6 h-6 text-text-secondary opacity-40 animate-float" />
+                <Brain className="w-6 h-6 text-text-secondary opacity-40" />
              </div>
 
              <div className="space-y-6 flex-1 flex flex-col justify-center">
